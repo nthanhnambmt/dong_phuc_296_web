@@ -7,8 +7,8 @@ import 'package:flutter/widgets.dart';
 /// A mock authentication service
 class DongPhuc296WebAuth extends ChangeNotifier {
   //TODO: 4
-  bool _signedIn = false;
-  // bool _signedIn = true;
+  // bool _signedIn = false;
+  bool _signedIn = true;
 
   bool get signedIn => _signedIn;
 

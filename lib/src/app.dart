@@ -1,118 +1,287 @@
-// Copyright 2021, the Flutter project authors. Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// Copyright 2019 The Flutter team. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
+import 'package:dong_phuc_296_web/src/screen/contact_us_screen.dart';
+import 'package:dong_phuc_296_web/src/screen/intro_screen.dart';
+import 'package:dong_phuc_296_web/src/screen/product_screen.dart';
+import 'package:dong_phuc_296_web/src/widgets/page_status.dart';
+import 'package:dong_phuc_296_web/src/widgets/scrim.dart';
+import 'package:dong_phuc_296_web/src/widgets/layout_cache.dart';
+import 'package:dong_phuc_296_web/src/widgets/theme.dart';
+import 'package:dong_phuc_296_web/src/util/strings.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:get/get_utils/src/platform/platform.dart';
+import 'package:scoped_model/scoped_model.dart';
 
-import 'auth.dart';
-import 'routing.dart';
-import 'screens/navigator.dart';
+import 'data/gallery_options.dart';
+import 'layout/adaptive.dart';
+import 'util/constants.dart';
+import 'layout/backdrop.dart';
+import 'widgets/category_menu_page.dart';
+import 'widgets/expanding_bottom_sheet.dart';
+import 'screen/home_screen.dart';
+import 'screen/login_screen.dart';
+import 'data/model/app_state_model.dart';
+import 'data/model/product.dart';
+import 'package:dong_phuc_296_web/src/routing/routes.dart' as routes;
 
-class DongPhuc296Web extends StatefulWidget {
-  const DongPhuc296Web({super.key});
+class ShrineApp extends StatefulWidget {
+  const ShrineApp({super.key});
+
+  static const String loginRoute = routes.loginRoute;
+  static const String homeRoute = routes.homeRoute;
+  static const String introRoute = routes.introduceRoute;
+  static const String chooseSizeRoute = routes.chooseSizeRoute;
+  static const String contactUsRoute = routes.contactUsRoute;
 
   @override
-  State<DongPhuc296Web> createState() => _DongPhuc296WebState();
+  State<ShrineApp> createState() => _ShrineAppState();
 }
 
-class _DongPhuc296WebState extends State<DongPhuc296Web> {
-  final _auth = DongPhuc296WebAuth();
-  final _navigatorKey = GlobalKey<NavigatorState>();
-  late final RouteState _routeState;
-  late final SimpleRouterDelegate _routerDelegate;
-  late final TemplateRouteParser _routeParser;
+class _ShrineAppState extends State<ShrineApp>
+    with TickerProviderStateMixin, RestorationMixin {
+  // Controller to coordinate both the opening/closing of backdrop and sliding
+  // of expanding bottom sheet
+  late AnimationController _controller;
+
+  // Animation Controller for expanding/collapsing the cart menu.
+  late AnimationController _expandingController;
+
+  final _RestorableAppStateModel _model = _RestorableAppStateModel();
+  final RestorableDouble _expandingTabIndex = RestorableDouble(0);
+  final RestorableDouble _tabIndex = RestorableDouble(1);
+  final Map<String, List<List<int>>> _layouts = {};
+
+  @override
+  String get restorationId => 'web296_app_state';
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    registerForRestoration(_model, 'app_state_model');
+    registerForRestoration(_tabIndex, 'tab_index');
+    registerForRestoration(
+      _expandingTabIndex,
+      'expanding_tab_index',
+    );
+    _controller.value = _tabIndex.value;
+    _expandingController.value = _expandingTabIndex.value;
+  }
 
   @override
   void initState() {
-    /// Configure the parser with all of the app's allowed path templates.
-    _routeParser = TemplateRouteParser(
-      allowedPaths: [
-        '/signin',
-        '/authors',
-        '/sizeList',
-        '/settings',
-        '/product/canvas',
-        '/product/all',
-        '/product/clothing',
-        '/productDetail/:productId',
-        '/author/:authorId',
-      ],
-      guard: _guard,
-      initialRoute: '/signin',
-      //TODO: 1
-      // initialRoute: '/product/clothing',
-    );
-
-    _routeState = RouteState(_routeParser);
-
-    _routerDelegate = SimpleRouterDelegate(
-      routeState: _routeState,
-      navigatorKey: _navigatorKey,
-      builder: (context) => DongPhuc296WebNavigator(
-        navigatorKey: _navigatorKey,
-      ),
-    );
-
-    // Listen for when the user logs out and display the signin screen.
-    _auth.addListener(_handleAuthStateChanged);
-
     super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) => RouteStateScope(
-        notifier: _routeState,
-        child: DongPhuc296WebAuthScope(
-          notifier: _auth,
-          child: MaterialApp.router(
-            routerDelegate: _routerDelegate,
-            routeInformationParser: _routeParser,
-            // Revert back to pre-Flutter-2.5 transition behavior:
-            // https://github.com/flutter/flutter/issues/82053
-            theme: ThemeData(
-              pageTransitionsTheme: const PageTransitionsTheme(
-                builders: {
-                  TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-                  TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-                  TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
-                  TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-                  TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
-                },
-              ),
-            ),
-          ),
-        ),
-      );
-
-  Future<ParsedRoute> _guard(ParsedRoute from) async {
-    final signedIn = _auth.signedIn;
-    final signInRoute = ParsedRoute('/signin', '/signin', {}, {});
-
-    // Go to /signin if the user is not signed in
-    if (!signedIn && from != signInRoute) {
-      return signInRoute;
-    }
-    // Go to /books if the user is signed in and tries to go to /signin.
-    else if (signedIn && from == signInRoute) {
-      return ParsedRoute('/product/clothing', '/product/clothing', {}, {});
-    }
-    return from;
-
-    // //TODO: 2
-    // return ParsedRoute('/product/clothing', '/product/clothing', {}, {});
-  }
-
-  void _handleAuthStateChanged() {
-    if (!_auth.signedIn) {
-      _routeState.go('/signin');
-    }
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 450),
+      value: 1,
+    );
+    // Save state restoration animation values only when the cart page
+    // fully opens or closes.
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed ||
+          status == AnimationStatus.dismissed) {
+        _tabIndex.value = _controller.value;
+      }
+    });
+    _expandingController = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+    // Save state restoration animation values only when the menu page
+    // fully opens or closes.
+    _expandingController.addStatusListener((status) {
+      if (status == AnimationStatus.completed ||
+          status == AnimationStatus.dismissed) {
+        _expandingTabIndex.value = _expandingController.value;
+      }
+    });
   }
 
   @override
   void dispose() {
-    _auth.removeListener(_handleAuthStateChanged);
-    _routeState.dispose();
-    _routerDelegate.dispose();
+    _controller.dispose();
+    _expandingController.dispose();
+    _tabIndex.dispose();
+    _expandingTabIndex.dispose();
     super.dispose();
+  }
+
+  Widget mobileBackdrop() {
+    return Backdrop(
+      frontLayer: const ProductPage(),
+      backLayer: CategoryMenuPage(onCategoryTap: () => _controller.forward()),
+      frontTitle: Text(textDongPhuc296),
+      backTitle: Text(textDongPhuc296),
+      controller: _controller,
+    );
+  }
+
+  Widget desktopBackdrop() {
+    return const DesktopBackdrop(
+      frontLayer: ProductPage(),
+      backLayer: CategoryMenuPage(),
+    );
+  }
+
+  // Closes the bottom sheet if it is open.
+  Future<bool> _onWillPop() async {
+    final status = _expandingController.status;
+    if (status == AnimationStatus.completed ||
+        status == AnimationStatus.forward) {
+      await _expandingController.reverse();
+      return false;
+    }
+
+    return true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isDesktop = isDisplayDesktop(context);
+    final backdrop = isDesktop ? desktopBackdrop() : mobileBackdrop();
+    final options = GalleryOptions.of(context);
+
+    final Widget homeScreenWidget = LayoutCache(
+      layouts: _layouts,
+      child: PageStatus(
+        menuController: _controller,
+        cartController: _expandingController,
+        child: HomeScreen(
+          backdrop: backdrop,
+          scrim: Scrim(controller: _expandingController),
+          expandingBottomSheet: ExpandingBottomSheet(
+            hideController: _controller,
+            expandingController: _expandingController,
+          ),
+        ),
+      ),
+    );
+
+    return ModelBinding(
+      initialModel: GalleryOptions(
+        themeMode: ThemeMode.system,
+        textScaleFactor: systemTextScaleFactorOption,
+        customTextDirection: CustomTextDirection.localeBased,
+        locale: vnLocales,
+        timeDilation: timeDilation,
+        platform: defaultTargetPlatform,
+        isTestMode: false,
+      ),
+      child: Builder(
+        builder: (context) {
+          return MaterialApp(
+              home: ScopedModel<AppStateModel>(
+                  model: _model.value,
+                  child: WillPopScope(
+                    onWillPop: _onWillPop,
+                    child: MaterialApp(
+                      // By default on desktop, scrollbars are applied by the
+                      // ScrollBehavior. This overrides that. All vertical scrollables in
+                      // the gallery need to be audited before enabling this feature,
+                      // see https://github.com/flutter/gallery/issues/541
+                      scrollBehavior: const MaterialScrollBehavior()
+                          .copyWith(scrollbars: false),
+                      restorationScopeId: 'web296App',
+                      title: textDongPhuc296,
+                      debugShowCheckedModeBanner: false,
+                      initialRoute: ShrineApp.loginRoute,
+                      routes: {
+                        ShrineApp.loginRoute: (context) => const LoginScreen(),
+                        ShrineApp.homeRoute: (context) => homeScreenWidget,
+                        ShrineApp.introRoute: (context) => const IntroScreen(),
+                        ShrineApp.contactUsRoute: (context) =>
+                            const ContactUsScreen(),
+                      },
+                      theme: web296Theme.copyWith(
+                        platform: GetPlatform.isMobile
+                            ? TargetPlatform.android
+                            : TargetPlatform.windows,
+                      ),
+                      // L10n settings.
+                      // localizationsDelegates: localizationsDelegates,
+                      // supportedLocales: supportedLocales,
+                      locale: vnLocales,
+                    ),
+                  )));
+        },
+      ),
+    );
+
+    // return MaterialApp(
+    //     home: ScopedModel<AppStateModel>(
+    //   model: _model.value,
+    //   child: WillPopScope(
+    //     onWillPop: _onWillPop,
+    //     child: MaterialApp(
+    //       // By default on desktop, scrollbars are applied by the
+    //       // ScrollBehavior. This overrides that. All vertical scrollables in
+    //       // the gallery need to be audited before enabling this feature,
+    //       // see https://github.com/flutter/gallery/issues/541
+    //       scrollBehavior:
+    //           const MaterialScrollBehavior().copyWith(scrollbars: false),
+    //       restorationScopeId: 'web296App',
+    //       title: 'Shrine',
+    //       debugShowCheckedModeBanner: false,
+    //       initialRoute: ShrineApp.loginRoute,
+    //       routes: {
+    //         ShrineApp.loginRoute: (context) => const LoginPage(),
+    //         ShrineApp.homeRoute: (context) => home,
+    //       },
+    //       theme: web296Theme.copyWith(
+    //         platform: GetPlatform.isMobile? TargetPlatform.android: TargetPlatform.windows,
+    //       ),
+    //       // L10n settings.
+    //       // localizationsDelegates: localizationsDelegates,
+    //       // supportedLocales: supportedLocales,
+    //       // locale: GalleryOptions.of(context).locale,
+    //     ),
+    //   ),
+    // ));
+  }
+}
+
+// const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+//     <LocalizationsDelegate<dynamic>>[
+//   GlobalMaterialLocalizations.delegate,
+//   GlobalCupertinoLocalizations.delegate,
+//   GlobalWidgetsLocalizations.delegate,
+// ];
+//
+// const List<Locale> supportedLocales = <Locale>[
+//   Locale('en'),
+//   Locale('vi'),
+// ];
+
+class _RestorableAppStateModel extends RestorableListenable<AppStateModel> {
+  @override
+  AppStateModel createDefaultValue() => AppStateModel()..loadProducts();
+
+  @override
+  AppStateModel fromPrimitives(Object? data) {
+    final appState = AppStateModel()..loadProducts();
+    final appData = Map<String, dynamic>.from(data as Map);
+
+    // Reset selected category.
+    final categoryIndex = appData['category_index'] as int;
+    appState.setCategory(categories[categoryIndex]);
+
+    // Reset cart items.
+    final cartItems = appData['cart_data'] as Map<dynamic, dynamic>;
+    cartItems.forEach((dynamic id, dynamic quantity) {
+      appState.addMultipleProductsToCart(id as int, quantity as int);
+    });
+
+    return appState;
+  }
+
+  @override
+  Object toPrimitives() {
+    return <String, dynamic>{
+      'cart_data': value.productsInCart,
+      'category_index': categories.indexOf(value.selectedCategory),
+    };
   }
 }

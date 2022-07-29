@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "1042952740806",
-    "project_id": "dongphuc296web",
-    "storage_bucket": "dongphuc296web.appspot.com"
+    "project_id": "dong_phuc_296_web",
+    "storage_bucket": "dong_phuc_296_web.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:1042952740806:android:2e52cdf0237dac3c9e1cc7",
         "android_client_info": {
-          "package_name": "dev.flutter.dongphuc296web"
+          "package_name": "dev.flutter.dong_phuc_296_web"
         }
       },
       "oauth_client": [
