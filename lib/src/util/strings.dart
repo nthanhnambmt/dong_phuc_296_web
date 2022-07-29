@@ -3,6 +3,7 @@ import 'dart:core';
 const String logoPath = 'packages/web_images/logo.png';
 const String menuIconPath = 'packages/web_images/slanted_menu.png';
 const String googleMapIconPath = 'packages/web_images/google_map.jpg';
+const String googleMapMobileIconPath = 'packages/web_images/google_map_mobile.png';
 const String text296 = '296';
 const String textDongPhuc296 = 'Đồng phục 296';
 const String textShortIntro = 'Đồng phục 296';
@@ -10,10 +11,22 @@ const String textLongIntro = 'Đồng phục 296';
 const String contactUs = 'Liên hệ';
 const String textAddress = 'Địa chỉ';
 const String address = '296/1 Nguyễn Văn Cừ, p.Tân Lập, tp.Buôn Ma Thuột, DakLak';
+const String addressMobile = '296/1 Nguyễn Văn Cừ, p.Tân Lập,\ntp.Buôn Ma Thuột, DakLak';
+const String textAddressHCM = 'Địa chỉ HCM';
+const String addressHCM = '80 đường số 9, p.Trường Thọ, tp.Thủ Đức, HCM';
+const String addressMobileHCM = '80 đường số 9, p.Trường Thọ,\ntp.Thủ Đức, HCM';
 const String textPhone = 'Điện thoại';
-const String phone = '0945.45.66.44(Nam)';
+const String phone = '0945.45.66.44(Mr.Nam)';
 const String textEmail = 'Email';
 const String email = 'nthanhnambmt@gmail.com';
+const String callPhoneButton = "tel://0945456644";
+const String callPhoneHCMButton = "tel://0826689495";
+
+///LINK
+const String googleMapLink = 'https://www.google.com/maps/place/%C4%90%E1%BB%93ng+ph%E1%BB%A5c+296/@12.6884113,108.0708275,19z/data=!4m5!3m4!1s0x3171f78906e7307b:0x9ccf0472cc2cf5f8!8m2!3d12.6883537!4d108.0708007?hl=vi';
+const String faceBookLink = 'https://www.facebook.com/dongphuc296';
+const String zaLoLink = 'https://zalo.me/84945456644';
+const String youtubeLink = 'https://www.youtube.com/channel/UCtVi-Kqt9uy4fRSIsT2uT8w';
 
 // /// **'Back to Gallery'**
 const String backToGallery = 'backToGallery';
@@ -32,6 +45,14 @@ const String web296CategoryNameAccessories = 'Phụ kiện';
 // /// In en, this message translates to:
 // /// **'CLOTHING'**
 const String web296CategoryNameClothing = 'Quần áo';
+const String web296CategoryNameUniform = 'Đồng phục';
+const String web296CategoryNameSport = 'Đồ thể thao';
+const String web296CategoryNameBaby = 'Đồ trẻ em';
+const String web296CategoryNameDress = 'Váy-Đầm';
+const String web296CategoryNameNightdress = 'Váy ngủ';
+const String web296CategoryNameCanvas = 'Túi-Balo Canvas';
+const String web296CategoryNamePrint = 'In vải';
+
 //
 // /// A category of products consisting of items used at home.
 // ///
@@ -421,7 +442,18 @@ const String web296TooltipRemoveItem = 'Xóa';
 // /// **'Remove item in cart'**
 const String web296TooltipAddItem = 'Thêm';
 
-//DIALOG
+///DIALOG
 const String dialogCancelButton = 'Hủy';
 const String dialogClearButton = 'Xóa';
 const String cartClearQuestion = 'Bạn muốn xóa giỏ hàng?';
+
+///Footer
+const String icFaceBook = 'packages/web_images/ic_facebook.png';
+const String icLazada = 'packages/web_images/ic_lazada.png';
+const String icZalo = 'packages/web_images/ic_zalo.png';
+const String icYoutube = 'packages/web_images/ic_youtube.png';
+const String icShopee = 'packages/web_images/ic_shopee.png';
+const String footerText1 = 'Sự hài lòng của khách hàng là ưu tiên số 1 của Đồng phục 296';
+const String footerText2 = 'Liên hệ đặt hàng:';
+const String footerTextHotLine = 'Hotline: 0945.45.66.44(Mr.Nam)';
+const String footerTextHotLineHCM = 'Hotline: 0826.68.94.95(Mrs.Nhi)';

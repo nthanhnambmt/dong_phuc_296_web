@@ -4,7 +4,13 @@ import '../layout/image_placeholder.dart';
 import '../util/strings.dart';
 
 class Web296LogoWidget extends StatelessWidget {
-  const Web296LogoWidget();
+  // const DeferredLoadingPlaceholder({
+  //   super.key,
+  //   this.name = 'This widget',
+  // });
+  const Web296LogoWidget({this.isSmallText = false});
+
+  final bool isSmallText;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,7 @@ class Web296LogoWidget extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             textDongPhuc296,
-            style: Theme.of(context).primaryTextTheme.displaySmall,
+            style: isSmallText?Theme.of(context).textTheme.headlineSmall: Theme.of(context).primaryTextTheme.displaySmall,
           ),
         ],
       ),

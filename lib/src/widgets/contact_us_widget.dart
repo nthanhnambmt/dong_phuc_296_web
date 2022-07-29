@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+
+import '../util/colors.dart';
+import '../util/strings.dart';
 
 class ContactUsWidget extends StatelessWidget {
   const ContactUsWidget({
@@ -7,12 +11,14 @@ class ContactUsWidget extends StatelessWidget {
     required this.iconSize,
     required this.title,
     required this.content,
+    required this.isClickable,
   }) : super(key: key);
 
   final IconData? icon;
   final double? iconSize;
   final String title;
   final String content;
+  final bool isClickable;
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +37,21 @@ class ContactUsWidget extends StatelessWidget {
               title,
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            Text(
-              content,
-              style: Theme.of(context).textTheme.subtitle2,
-            ),
+            isClickable
+                ? InkWell(
+                    child: Text(content,
+                        style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                              color: web296Brown600,
+                            ),
+                        maxLines: 2,
+                        softWrap: true),
+                    onTap: () => launchUrlString(callPhoneButton))
+                : Text(
+                    content,
+                    style: Theme.of(context).textTheme.subtitle2,
+                  )
           ],
-        ),
+        )
       ],
     );
   }

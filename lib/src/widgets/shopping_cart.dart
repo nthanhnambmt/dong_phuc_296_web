@@ -99,46 +99,50 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                     const SizedBox(height: 100),
                   ],
                 ),
-                PositionedDirectional(
-                  bottom: 16,
-                  start: 16,
-                  end: 16,
-                  child: Semantics(
-                    sortKey: const OrdinalSortKey(3, name: _ordinalSortKeyName),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: const BeveledRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(7)),
-                        ),
-                        primary: web296Pink100,
-                      ),
-                      onPressed: () {
-                        Utils.showTwoButtonDialog(context, cartClearQuestion,
-                            () {
-                          setState(() {
-                            model.clearCart();
-                            expandingBottomSheet!.close();
-                          });
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: Text(
-                          web296CartClearButtonCaption,
-                          style: TextStyle(
-                              letterSpacing:
-                                  letterSpacingOrNone(largeLetterSpacing)),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                buildButtonClearCart(context, model, expandingBottomSheet),
               ],
             );
           },
         ),
       ),
     );
+  }
+
+  PositionedDirectional buildButtonClearCart(BuildContext context, AppStateModel model, ExpandingBottomSheetState? expandingBottomSheet) {
+    return PositionedDirectional(
+                bottom: 16,
+                start: 16,
+                end: 16,
+                child: Semantics(
+                  sortKey: const OrdinalSortKey(3, name: _ordinalSortKeyName),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: const BeveledRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(7)),
+                      ),
+                      primary: web296Pink100,
+                    ),
+                    onPressed: () {
+                      Utils.showTwoButtonDialog(context, cartClearQuestion,
+                          () {
+                        setState(() {
+                          model.clearCart();
+                          expandingBottomSheet!.close();
+                        });
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: Text(
+                        web296CartClearButtonCaption,
+                        style: TextStyle(
+                            letterSpacing:
+                                letterSpacingOrNone(largeLetterSpacing)),
+                      ),
+                    ),
+                  ),
+                ),
+              );
   }
 }
 

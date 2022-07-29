@@ -5,6 +5,7 @@
 import 'package:dong_phuc_296_web/src/layout/text_scale.dart';
 import 'package:dong_phuc_296_web/src/data/model/product.dart';
 import 'package:dong_phuc_296_web/src/widgets/page_status.dart';
+import 'package:dong_phuc_296_web/src/widgets/web_296_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../data/gallery_options.dart';
@@ -30,7 +31,7 @@ class CategoryMenuPage extends StatelessWidget {
 
   Widget _buttonText(String caption, TextStyle style) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       child: Text(
         caption,
         style: style,
@@ -105,85 +106,89 @@ class CategoryMenuPage extends StatelessWidget {
             child: Container(
               color: bgCategory,
               width: desktopCategoryMenuPageWidth(context: context),
-              child: Column(
-                children: [
-                  const SizedBox(height: 64),
-                  Image.asset(
-                    logoPath,
-                    excludeFromSemantics: true,
-                  ),
-                  const SizedBox(height: 16),
-                  Semantics(
-                    container: true,
-                    child: Text(
-                      textDongPhuc296,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                  ),
-                  const Spacer(),
-                  for (final category in categories)
-                    _buildCategory(category, context),
-                  Semantics(
-                    button: true,
-                    enabled: true,
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context)
-                              .restorablePushNamed(ShrineApp.contactUsRoute);
-                        },
-                        child: _buttonText(
-                          web296CategoryNameContactUs,
-                          logoutTextStyle,
+              child: ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  children: [
+                    const SizedBox(height: 10),
+                    Web296LogoWidget(isSmallText: true),
+                    // const SizedBox(height: 10),
+                    // Image.asset(
+                    //   logoPath,
+                    //   excludeFromSemantics: true,
+                    // ),
+                    // // const SizedBox(height: 16),
+                    // Semantics(
+                    //   container: true,
+                    //   child: Text(
+                    //     textDongPhuc296,
+                    //     style: Theme.of(context).textTheme.headline5,
+                    //   ),
+                    // ),
+                    const SizedBox(height: 20),
+                    const Spacer(),
+                    for (final category in categories)
+                      _buildCategory(category, context),
+                    Semantics(
+                      button: true,
+                      enabled: true,
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .restorablePushNamed(ShrineApp.contactUsRoute);
+                          },
+                          child: _buttonText(
+                            web296CategoryNameContactUs,
+                            logoutTextStyle,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Semantics(
-                    button: true,
-                    enabled: true,
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context)
-                              .restorablePushNamed(ShrineApp.introRoute);
-                        },
-                        child: _buttonText(
-                          web296CategoryNameIntro,
-                          logoutTextStyle,
+                    Semantics(
+                      button: true,
+                      enabled: true,
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .restorablePushNamed(ShrineApp.introRoute);
+                          },
+                          child: _buttonText(
+                            web296CategoryNameIntro,
+                            logoutTextStyle,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  _divider(context: context),
-                  Semantics(
-                    button: true,
-                    enabled: true,
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context)
-                              .restorablePushNamed(ShrineApp.loginRoute);
-                        },
-                        child: _buttonText(
-                          web296LogoutButtonCaption,
-                          logoutTextStyle,
+                    _divider(context: context),
+                    Semantics(
+                      button: true,
+                      enabled: true,
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .restorablePushNamed(ShrineApp.loginRoute);
+                          },
+                          child: _buttonText(
+                            web296LogoutButtonCaption,
+                            logoutTextStyle,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    icon: const Icon(Icons.search),
-                    tooltip: web296TooltipSearch,
-                    onPressed: () {},
-                  ),
-                  const SizedBox(height: 72),
-                ],
-              ),
+                    const Spacer(),
+                    IconButton(
+                      icon: const Icon(Icons.search),
+                      tooltip: web296TooltipSearch,
+                      onPressed: () {},
+                    ),
+                    const SizedBox(height: 150),
+                  ]),
             ),
           ),
         ),

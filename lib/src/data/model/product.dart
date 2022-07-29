@@ -20,12 +20,36 @@ Category categoryAll = Category(
   name: (context) => web296CategoryNameAll,
 );
 
-Category categoryAccessories = Category(
-  name: (context) => web296CategoryNameAccessories,
-);
-
 Category categoryClothing = Category(
   name: (context) => web296CategoryNameClothing,
+);
+
+Category categoryUniform = Category(
+  name: (context) => web296CategoryNameUniform,
+);
+
+Category categorySport = Category(
+  name: (context) => web296CategoryNameSport,
+);
+
+Category categoryBaby = Category(
+  name: (context) => web296CategoryNameBaby,
+);
+
+Category categoryDress = Category(
+  name: (context) => web296CategoryNameDress,
+);
+
+Category categoryNightdress = Category(
+  name: (context) => web296CategoryNameNightdress,
+);
+
+Category categoryPrint = Category(
+  name: (context) => web296CategoryNamePrint,
+);
+
+Category categoryAccessories = Category(
+  name: (context) => web296CategoryNameAccessories,
 );
 
 Category categoryHome = Category(
@@ -33,10 +57,16 @@ Category categoryHome = Category(
 );
 
 List<Category> categories = [
-  categoryAll,
+  // categoryAll,
+  categoryUniform,
+  categorySport,
+  categoryBaby,
+  categoryDress,
+  categoryNightdress,
   categoryAccessories,
-  categoryClothing,
-  categoryHome,
+  categoryPrint,
+  // categoryClothing,
+  // categoryHome,
 ];
 
 class Product {
