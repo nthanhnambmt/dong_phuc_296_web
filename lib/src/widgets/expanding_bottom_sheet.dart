@@ -5,7 +5,7 @@
 import 'dart:math';
 
 import 'package:dong_phuc_296_web/src/widgets/page_status.dart';
-import 'package:dong_phuc_296_web/src/widgets/shopping_cart.dart';
+import 'package:dong_phuc_296_web/src/widgets/cart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -443,7 +443,7 @@ class ExpandingBottomSheetState extends State<ExpandingBottomSheet> {
   Widget _buildShoppingCartPage() {
     return Opacity(
       opacity: _cartOpacityAnimation.value,
-      child: const ShoppingCartPage(),
+      child: const CartWidget(),
     );
   }
 

@@ -187,9 +187,12 @@ class _ShrineAppState extends State<ShrineApp>
                       restorationScopeId: 'web296App',
                       title: textDongPhuc296,
                       debugShowCheckedModeBanner: false,
-                      initialRoute: ShrineApp.loginRoute,
+
+                      ///initRoute
+                      // initialRoute: ShrineApp.loginRoute,
+                      initialRoute: ShrineApp.homeRoute,
                       routes: {
-                        ShrineApp.loginRoute: (context) => const LoginScreen(),
+                        // ShrineApp.loginRoute: (context) => const LoginScreen(),
                         ShrineApp.homeRoute: (context) => homeScreenWidget,
                         ShrineApp.introRoute: (context) => const IntroScreen(),
                         ShrineApp.contactUsRoute: (context) =>

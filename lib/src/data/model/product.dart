@@ -56,14 +56,19 @@ Category categoryHome = Category(
   name: (context) => web296CategoryNameHome,
 );
 
+Category categoryCanvas = Category(
+  name: (context) => web296CategoryNameCanvas,
+);
+
 List<Category> categories = [
-  // categoryAll,
+  categoryAll,
   categoryUniform,
   categorySport,
   categoryBaby,
   categoryDress,
   categoryNightdress,
   categoryAccessories,
+  categoryCanvas,
   categoryPrint,
   // categoryClothing,
   // categoryHome,
@@ -95,7 +100,7 @@ class Product {
     return this.price * _quantity;
   }
 
-  String get getImageName => '$id-0.jpg';
+  String get getImageName => '$id.jpg';
 
   String get getThumbNail => 'product_images';
 

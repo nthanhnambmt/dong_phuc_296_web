@@ -4,18 +4,13 @@
 
 import 'dart:io';
 
-import 'package:dong_phuc_296_web/src/data/gallery_options.dart';
-import 'package:dong_phuc_296_web/src/layout/adaptive.dart';
-import 'package:dong_phuc_296_web/src/app.dart';
-import 'package:dong_phuc_296_web/src/util/strings.dart';
+import 'package:dong_phuc_296_web/src/app.dart'
+    deferred as web296;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:window_size/window_size.dart';
-import 'package:dong_phuc_296_web/src/app.dart'
-    deferred as web296;
 
 import 'src/widgets/deferred_widget.dart';
 

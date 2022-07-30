@@ -32,7 +32,7 @@ const String youtubeLink = 'https://www.youtube.com/channel/UCtVi-Kqt9uy4fRSIsT2
 const String backToGallery = 'backToGallery';
 
 // /// **'ALL'**
-const String web296CategoryNameAll = 'All';
+const String web296CategoryNameAll = 'Tất cả';
 //
 // /// A category of products consisting of accessories (clothing items).
 // ///
@@ -105,280 +105,20 @@ const String web296NextButtonCaption = 'Tiếp theo';
 // /// Caption for a shopping cart page.
 // ///
 // /// In en, this message translates to:
-// /// **'CART'**
+
+/// **'CART'**
 const String web296CartPageCaption = 'Giỏ hàng';
-//
-// /// A text showing the number of items for a specific product.
-// ///
-// /// In en, this message translates to:
-// /// **'Quantity: {quantity}'**
 const String web296ProductQuantity = 'Số lượng';
-//
-// /// A text showing the unit price of each product. Used as: 'Quantity: 3 x $129'. The currency will be handled by the formatter.
-// ///
-// /// In en, this message translates to:
-// /// **'x {price}'**
 const String web296ProductPrice = 'Đơn giá';
-//
-// /// A text showing the total number of items in the cart.
-// ///
-// /// In en, this message translates to:
-// /// **'{quantity, plural, =0{NO ITEMS} =1{1 ITEM} other{{quantity} ITEMS}}'**
 const String web296CartItemCount = 'mặt hàng';
-//
-// /// Caption for a button used to clear the cart.
-// ///
-// /// In en, this message translates to:
-// /// **'CLEAR CART'**
 const String web296CartClearButtonCaption = 'Xóa giỏ hàng';
-//
-// /// Label for a text showing total price of the items in the cart.
-// ///
-// /// In en, this message translates to:
-// /// **'TOTAL'**
+const String web296CartPaymentButtonCaption = 'Thanh toán';
+const String web296CartOrderButtonCaption = 'Đặt hàng';
 const String web296CartTotalCaption = 'Tổng cộng';
-//
-// /// Label for a text showing the subtotal price of the items in the cart (excluding shipping and tax).
-// ///
-// /// In en, this message translates to:
-// /// **'Subtotal:'**
 const String web296CartSubtotalCaption = 'Hàng hóa';
-//
-// /// Label for a text showing the shipping cost for the items in the cart.
-// ///
-// /// In en, this message translates to:
-// /// **'Shipping:'**
 const String web296CartShippingCaption = 'Giao hàng';
-//
-// /// Label for a text showing the tax for the items in the cart.
-// ///
-// /// In en, this message translates to:
-// /// **'Tax:'**
 const String web296CartTaxCaption = 'Thuế';
-//
-// /// Name of the product 'Vagabond sack'.
-// ///
-// /// In en, this message translates to:
-// /// **'Vagabond sack'**
-const String web296ProductVagabondSack = 'Vagabond sack';
-//
-// /// Name of the product 'Stella sunglasses'.
-// ///
-// /// In en, this message translates to:
-// /// **'Stella sunglasses'**
-const String web296ProductStellaSunglasses = 'Stella sunglasses';
-//
-// /// Name of the product 'Whitney belt'.
-// ///
-// /// In en, this message translates to:
-// /// **'Whitney belt'**
-const String web296ProductWhitneyBelt = 'Whitney belt';
-//
-// /// Name of the product 'Garden strand'.
-// ///
-// /// In en, this message translates to:
-// /// **'Garden strand'**
-const String web296ProductGardenStrand = 'Garden strand';
 
-/// Name of the product 'Strut earrings'.
-///
-/// In en, this message translates to:
-/// **'Strut earrings'**
-const String web296ProductStrutEarrings = 'Strut earrings';
-
-/// Name of the product 'Varsity socks'.
-///
-/// In en, this message translates to:
-/// **'Varsity socks'**
-const String web296ProductVarsitySocks = 'Varsity socks';
-
-/// Name of the product 'Weave keyring'.
-///
-/// In en, this message translates to:
-/// **'Weave keyring'**
-const String web296ProductWeaveKeyring = 'Weave keyring';
-
-/// Name of the product 'Gatsby hat'.
-///
-/// In en, this message translates to:
-/// **'Gatsby hat'**
-const String web296ProductGatsbyHat = 'Gatsby hat';
-
-/// Name of the product 'Shrug bag'.
-///
-/// In en, this message translates to:
-/// **'Shrug bag'**
-const String web296ProductShrugBag = 'Shrug bag';
-
-/// Name of the product 'Gilt desk trio'.
-///
-/// In en, this message translates to:
-/// **'Gilt desk trio'**
-const String web296ProductGiltDeskTrio = 'Gilt desk trio';
-
-/// Name of the product 'Copper wire rack'.
-///
-/// In en, this message translates to:
-/// **'Copper wire rack'**
-const String web296ProductCopperWireRack = 'Copper wire rack';
-
-/// Name of the product 'Soothe ceramic set'.
-///
-/// In en, this message translates to:
-/// **'Soothe ceramic set'**
-const String web296ProductSootheCeramicSet = 'Soothe ceramic set';
-
-/// Name of the product 'Hurrahs tea set'.
-///
-/// In en, this message translates to:
-/// **'Hurrahs tea set'**
-const String web296ProductHurrahsTeaSet = 'Hurrahs tea set';
-
-/// Name of the product 'Blue stone mug'.
-///
-/// In en, this message translates to:
-/// **'Blue stone mug'**
-const String web296ProductBlueStoneMug = 'Blue stone mug';
-
-/// Name of the product 'Rainwater tray'.
-///
-/// In en, this message translates to:
-/// **'Rainwater tray'**
-const String web296ProductRainwaterTray = 'Rainwater tray';
-
-/// Name of the product 'Chambray napkins'.
-///
-/// In en, this message translates to:
-/// **'Chambray napkins'**
-const String web296ProductChambrayNapkins = 'Chambray napkin';
-
-/// Name of the product 'Succulent planters'.
-///
-/// In en, this message translates to:
-/// **'Succulent planters'**
-const String web296ProductSucculentPlanters = 'Succulent planters';
-
-/// Name of the product 'Quartet table'.
-///
-/// In en, this message translates to:
-/// **'Quartet table'**
-const String web296ProductQuartetTable = 'Quartet table';
-
-/// Name of the product 'Kitchen quattro'.
-///
-/// In en, this message translates to:
-/// **'Kitchen quattro'**
-const String web296ProductKitchenQuattro = 'Kitchen quattro';
-
-/// Name of the product 'Clay sweater'.
-///
-/// In en, this message translates to:
-/// **'Clay sweater'**
-const String web296ProductClaySweater = 'Clay sweater';
-
-/// Name of the product 'Sea tunic'.
-///
-/// In en, this message translates to:
-/// **'Sea tunic'**
-const String web296ProductSeaTunic = 'Sea tunic';
-
-/// Name of the product 'Plaster tunic'.
-///
-/// In en, this message translates to:
-/// **'Plaster tunic'**
-const String web296ProductPlasterTunic = 'Plaster tunic';
-
-/// Name of the product 'White pinstripe shirt'.
-///
-/// In en, this message translates to:
-/// **'White pinstripe shirt'**
-const String web296ProductWhitePinstripeShirt =
-    'White pinstripe shirt';
-
-/// Name of the product 'Chambray shirt'.
-///
-/// In en, this message translates to:
-/// **'Chambray shirt'**
-const String web296ProductChambrayShirt = 'Chambray shirt';
-
-/// Name of the product 'Seabreeze sweater'.
-///
-/// In en, this message translates to:
-/// **'Seabreeze sweater'**
-const String web296ProductSeabreezeSweater = 'Seabreeze sweater';
-
-/// Name of the product 'Gentry jacket'.
-///
-/// In en, this message translates to:
-/// **'Gentry jacket'**
-const String web296ProductGentryJacket = 'Gentry jacket';
-
-/// Name of the product 'Navy trousers'.
-///
-/// In en, this message translates to:
-/// **'Navy trousers'**
-const String web296ProductNavyTrousers = 'Navy trousers';
-
-/// Name of the product 'Walter henley (white)'.
-///
-/// In en, this message translates to:
-/// **'Walter henley (white)'**
-const String web296ProductWalterHenleyWhite = 'Walter henley (white)';
-
-/// Name of the product 'Surf and perf shirt'.
-///
-/// In en, this message translates to:
-/// **'Surf and perf shirt'**
-const String web296ProductSurfAndPerfShirt = 'Surf and perf shirt';
-
-/// Name of the product 'Ginger scarf'.
-///
-/// In en, this message translates to:
-/// **'Ginger scarf'**
-const String web296ProductGingerScarf = 'Ginger scarf';
-
-/// Name of the product 'Ramona crossover'.
-///
-/// In en, this message translates to:
-/// **'Ramona crossover'**
-const String web296ProductRamonaCrossover = 'Ramona crossover';
-
-/// Name of the product 'Classic white collar'.
-///
-/// In en, this message translates to:
-/// **'Classic white collar'**
-const String web296ProductClassicWhiteCollar =
-    'Classic white collar';
-
-/// Name of the product 'Cerise scallop tee'.
-///
-/// In en, this message translates to:
-/// **'Cerise scallop tee'**
-const String web296ProductCeriseScallopTee = 'Cerise scallop tee';
-
-/// Name of the product 'Shoulder rolls tee'.
-///
-/// In en, this message translates to:
-/// **'Shoulder rolls tee'**
-const String web296ProductShoulderRollsTee = 'Shoulder rolls tee';
-
-/// Name of the product 'Grey slouch tank'.
-///
-/// In en, this message translates to:
-/// **'Grey slouch tank'**
-const String web296ProductGreySlouchTank = 'Grey slouch tank';
-
-/// Name of the product 'Sunshirt dress'.
-///
-/// In en, this message translates to:
-/// **'Sunshirt dress'**
-const String web296ProductSunshirtDress = 'Sunshirt dress';
-
-/// Name of the product 'Fine lines tee'.
-///
-/// In en, this message translates to:
-/// **'Fine lines tee'**
-const String web296ProductFineLinesTee = 'Fine lines tee';
 //
 // /// The tooltip text for a search button. Also used as a semantic label, used by screen readers, such as TalkBack and VoiceOver.
 // ///
@@ -457,3 +197,13 @@ const String footerText1 = 'Sự hài lòng của khách hàng là ưu tiên s�
 const String footerText2 = 'Liên hệ đặt hàng:';
 const String footerTextHotLine = 'Hotline: 0945.45.66.44(Mr.Nam)';
 const String footerTextHotLineHCM = 'Hotline: 0826.68.94.95(Mrs.Nhi)';
+
+///PRODUCT NAME
+const String aoBongBan = 'Áo bóng bàn';
+const String tuiCanVas = 'Túi Canvas';
+const String baloCanVas = 'Balo Canvas';
+const String aoPoloNam = 'Áo Polo nam';
+const String aoPoloNu = 'Áo Polo nữ';
+const String inBenHongAo = 'In bên hông áo 30x40cm';
+const String inHinh3040 = 'In hình 30x40cm';
+
