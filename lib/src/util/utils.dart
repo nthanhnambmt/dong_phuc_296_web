@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:js';
 import 'dart:math';
 import 'dart:ui' as ui;
 
+import 'package:dong_phuc_296_web/src/data/model/order_model.dart';
 import 'package:dong_phuc_296_web/src/util/strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +17,7 @@ import '../data/gallery_options.dart';
 import '../layout/text_scale.dart';
 import '../widgets/dialog_button_widget.dart';
 import 'constants.dart';
+import 'package:http/http.dart' as http;
 
 class Utils {
   // bool isTablet = context.isTablet;
@@ -51,6 +55,24 @@ class Utils {
       360 * reducedTextScale(context),
       MediaQuery.of(context).size.width - 2 * horizontalPadding,
     );
+  }
+
+  static void showAlertDialog(BuildContext context, String content) {
+    final theme = Theme.of(context);
+    final dialogTextStyle = theme.textTheme.subtitle1!
+        .copyWith(color: theme.textTheme.caption!.color);
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Text(
+                content,
+                style: dialogTextStyle,
+              ),
+              // actions: [
+              //   DialogButtonWidget(text: dialogCancelButton),
+              //
+              // ],
+            ));
   }
 
   static void showTwoButtonDialog(
@@ -611,5 +633,48 @@ class Utils {
     tp.layout(maxWidth: width);
     List<ui.LineMetrics> lines = tp.computeLineMetrics();
     return lines.length;
+  }
+
+  //send notification
+  static void sendFCM(BuildContext context, List<String?> lstDeviceToken,
+      OrderModel orderModel, VoidCallback? onSendSuccess) async {
+    lstDeviceToken.forEach((deviceToken) async {
+      if (deviceToken == null) {
+        print(
+            '---------------------Unable to send FCM message, no token exists.');
+        return;
+      }
+      try {
+        await http
+            .post(
+              Uri.parse('https://fcm.googleapis.com/fcm/send'),
+              headers: <String, String>{
+                'Content-Type': 'application/json',
+                'Authorization': 'key=$fcm_server_key'
+              },
+              body: json.encode({
+                'to': deviceToken,
+                'message': {
+                  'token': deviceToken,
+                },
+                "notification": {
+                  "title": "Push Notification",
+                  "body": "Tesst cai nao"
+                },
+                "data": {
+                  "click_action": "FLUTTER_NOTIFICATION_CLICK",
+                  "sound": "default",
+                  "status": "done",
+                  "screen": "screenA",
+                }
+              }),
+            )
+            .then((value) => print(value.body));
+        print('--------------------------FCM request for web sent!');
+        if (onSendSuccess != null) onSendSuccess();
+      } catch (e) {
+        print(e);
+      }
+    });
   }
 }

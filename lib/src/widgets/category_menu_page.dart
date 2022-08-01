@@ -106,27 +106,16 @@ class CategoryMenuPage extends StatelessWidget {
             child: Container(
               color: bgCategory,
               width: desktopCategoryMenuPageWidth(context: context),
-              child: ListView(
+              child:
+              ListView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   shrinkWrap: true,
                   children: [
                     const SizedBox(height: 10),
                     Web296LogoWidget(isSmallText: true),
-                    // const SizedBox(height: 10),
-                    // Image.asset(
-                    //   logoPath,
-                    //   excludeFromSemantics: true,
-                    // ),
-                    // // const SizedBox(height: 16),
-                    // Semantics(
-                    //   container: true,
-                    //   child: Text(
-                    //     textDongPhuc296,
-                    //     style: Theme.of(context).textTheme.headline5,
-                    //   ),
-                    // ),
                     const SizedBox(height: 20),
-                    const Spacer(),
+                    ///Dùng Spacer bị lỗi Incorrect use of ParentDataWidget.
+                    // const Spacer(),
                     for (final category in categories)
                       _buildCategory(category, context),
                     Semantics(
@@ -164,24 +153,24 @@ class CategoryMenuPage extends StatelessWidget {
                       ),
                     ),
                     _divider(context: context),
-                    Semantics(
-                      button: true,
-                      enabled: true,
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .restorablePushNamed(ShrineApp.loginRoute);
-                          },
-                          child: _buttonText(
-                            web296LogoutButtonCaption,
-                            logoutTextStyle,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
+                    ///Đăng xuất
+                    // Semantics(
+                    //   button: true,
+                    //   enabled: true,
+                    //   child: MouseRegion(
+                    //     cursor: SystemMouseCursors.click,
+                    //     child: GestureDetector(
+                    //       onTap: () {
+                    //         Navigator.of(context)
+                    //             .restorablePushNamed(ShrineApp.loginRoute);
+                    //       },
+                    //       child: _buttonText(
+                    //         web296LogoutButtonCaption,
+                    //         logoutTextStyle,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     IconButton(
                       icon: const Icon(Icons.search),
                       tooltip: web296TooltipSearch,

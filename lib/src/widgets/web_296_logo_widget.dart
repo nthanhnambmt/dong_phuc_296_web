@@ -17,7 +17,8 @@ class Web296LogoWidget extends StatelessWidget {
     return ExcludeSemantics(
       child: Column(
         children: [
-          const FadeInImagePlaceholder(
+          FadeInImagePlaceholder(
+            height: isSmallText ? 50 : 100,
             image: AssetImage(logoPath),
             placeholder: SizedBox(
               width: 34,
@@ -27,7 +28,9 @@ class Web296LogoWidget extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             textDongPhuc296,
-            style: isSmallText?Theme.of(context).textTheme.headlineSmall: Theme.of(context).primaryTextTheme.displaySmall,
+            style: isSmallText
+                ? Theme.of(context).textTheme.headlineSmall
+                : Theme.of(context).primaryTextTheme.displaySmall,
           ),
         ],
       ),

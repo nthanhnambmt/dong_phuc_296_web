@@ -10,10 +10,12 @@ import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../data/model/app_state_model.dart';
+import '../data/model/order_model.dart';
 import '../layout/letter_spacing.dart';
 import '../util/colors.dart';
 import '../util/strings.dart';
 import '../util/utils.dart';
+import 'EditTextWidget.dart';
 import 'cart_row_widget.dart';
 import 'expanding_bottom_sheet.dart';
 
@@ -28,6 +30,10 @@ class CartWidget extends StatefulWidget {
 }
 
 class _CartWidgetState extends State<CartWidget> {
+  final receiverNameController = TextEditingController();
+  final receiverPhoneController = TextEditingController();
+  final receiverAddressController = TextEditingController();
+
   List<Widget> _createShoppingCartRows(AppStateModel model) {
     return model.productsInCart.keys
         .map(
@@ -97,11 +103,13 @@ class _CartWidgetState extends State<CartWidget> {
                           const OrdinalSortKey(2, name: _ordinalSortKeyName),
                       child: ShoppingCartSummary(model: model),
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 30),
                     Padding(
                       padding: const EdgeInsets.all(15),
                       child: Column(
                         children: [
+                          buildShippingInfo(
+                              context, model, expandingBottomSheet),
                           buildButtonOrder(
                               context, model, expandingBottomSheet),
                           const SizedBox(height: 20),
@@ -120,41 +128,95 @@ class _CartWidgetState extends State<CartWidget> {
     );
   }
 
+  Container buildShippingInfo(BuildContext context, AppStateModel model,
+      ExpandingBottomSheetState? expandingBottomSheet) {
+    final localTheme = Theme.of(context);
+
+    return Container(
+        constraints: BoxConstraints(
+          maxHeight: double.infinity,
+        ),
+        width: double.infinity,
+        child: Semantics(
+          sortKey: const OrdinalSortKey(3, name: _ordinalSortKeyName),
+          child: Column(
+            children: [
+              Text(
+                receiverInfo,
+                style: localTheme.textTheme.subtitle1!
+                    .copyWith(fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              EditTextWidget(receiverName, receiverNameController),
+              SizedBox(
+                height: 10,
+              ),
+              EditTextWidget(receiverPhone, receiverPhoneController),
+              SizedBox(
+                height: 10,
+              ),
+              EditTextWidget(receiverAddress, receiverAddressController),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
+        ));
+  }
+
   Container buildButtonOrder(BuildContext context, AppStateModel model,
       ExpandingBottomSheetState? expandingBottomSheet) {
-    return
-        Container(
-            constraints: BoxConstraints(
-              maxHeight: double.infinity,
+    return Container(
+        constraints: BoxConstraints(
+          maxHeight: double.infinity,
+        ),
+        width: double.infinity,
+        child: Semantics(
+          sortKey: const OrdinalSortKey(3, name: _ordinalSortKeyName),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: const BeveledRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(7)),
+              ),
+              primary: web296Pink100,
             ),
-            width: double.infinity,
-            child: Semantics(
-              sortKey: const OrdinalSortKey(3, name: _ordinalSortKeyName),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: const BeveledRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(7)),
-                  ),
-                  primary: web296Pink100,
-                ),
-                onPressed: () {
+            onPressed: () {
+              // Utils.showTwoButtonDialog(context, cartClearQuestion, () {
+              //   setState(() {
+              //     model.clearCart();
+              //     expandingBottomSheet!.close();
+              //   });
+              // });
+              Utils.sendFCM(
+                context,
+                [fcm_token_nokia_2_3],
+                OrderModel(
+                    receiverNameController.text,
+                    receiverPhoneController.text,
+                    receiverAddressController.text),
+                () => {
                   Utils.showTwoButtonDialog(context, cartClearQuestion, () {
                     setState(() {
+                      Utils.showAlertDialog(context, orderSuccess);
                       model.clearCart();
                       expandingBottomSheet!.close();
                     });
-                  });
+                  })
                 },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  child: Text(
-                    web296CartOrderButtonCaption,
-                    style: TextStyle(
-                        letterSpacing: letterSpacingOrNone(largeLetterSpacing)),
-                  ),
-                ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(
+                web296CartOrderButtonCaption,
+                style: TextStyle(
+                    letterSpacing: letterSpacingOrNone(largeLetterSpacing)),
               ),
-            ));
+            ),
+          ),
+        ));
   }
 
   Container buildButtonClearCart(BuildContext context, AppStateModel model,

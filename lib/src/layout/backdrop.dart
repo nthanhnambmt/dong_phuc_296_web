@@ -112,7 +112,8 @@ class _BackdropTitle extends AnimatedWidget {
       child: Row(children: [
         // branded icon
         SizedBox(
-          width: 72,
+          height: 72,
+          // width: 72,
           child: Semantics(
             container: true,
             child: IconButton(
@@ -124,15 +125,15 @@ class _BackdropTitle extends AnimatedWidget {
                   opacity: animation.value,
                   child: directionalSlantedMenuIcon,
                 ),
-                FractionalTranslation(
-                  translation: Tween<Offset>(
-                    begin: Offset.zero,
-                    end: Offset(1.0 * textDirectionScalar, 0.0),
-                  ).evaluate(animation),
-                  child: const ImageIcon(
-                    AssetImage(logoPath),
-                  ),
-                ),
+                // FractionalTranslation(
+                //   translation: Tween<Offset>(
+                //     begin: Offset.zero,
+                //     end: Offset(1.0 * textDirectionScalar, 0.0),
+                //   ).evaluate(animation),
+                //   child: const ImageIcon(
+                //     AssetImage(iconLogoPath,), color: null,
+                //   ),
+                // ),
               ]),
             ),
           ),

@@ -1,6 +1,8 @@
 import 'dart:core';
 
-const String logoPath = 'packages/web_images/logo.png';
+const String logoPath = 'packages/web_images/logo_goc_jpg-250.jpg';
+const String iconLogoPath = 'packages/web_images/rsz_logo_goc_png_fb.png';
+// const String iconLogoPath = 'packages/web_images/diamond.png';
 const String menuIconPath = 'packages/web_images/slanted_menu.png';
 const String googleMapIconPath = 'packages/web_images/google_map.jpg';
 const String googleMapMobileIconPath = 'packages/web_images/google_map_mobile.png';
@@ -206,4 +208,15 @@ const String aoPoloNam = 'Áo Polo nam';
 const String aoPoloNu = 'Áo Polo nữ';
 const String inBenHongAo = 'In bên hông áo 30x40cm';
 const String inHinh3040 = 'In hình 30x40cm';
+
+///Shipping info
+const String receiverInfo = 'Thông tin giao hàng:';
+const String receiverName = 'Họ tên';
+const String receiverPhone = 'Số điện thoại';
+const String receiverAddress = 'Địa chỉ nhận hàng';
+const String orderSuccess = 'Đặt hàng thành công';
+
+///FCM token
+const String fcm_server_key = 'AAAA8tTT38Y:APA91bG_GteQU6rh8yk8jMbVsEzGDCf31K-n31VYphGr3MIjVCQ_k2c90Kc4Hcguvg6oo0hDHCFqcv1rfgt-F2f-tGp4p06TsKMFMjrqz0gg7J4sXG1VgSF9v3wVbCNv-eEgNYzlnlDk';
+const String fcm_token_nokia_2_3 = 'fADYmiZ-QRaBCNVsbpsapt:APA91bFdS10tqEPGSDJOIW-ZhzML54yFfMHdk00fAveAmfsZ8Sm8Z6gLbAIhguOzV9YDxm1Fb6b1pRNUfKE0wx5EydNlqQN-26QXh07Thdd889daTMxLYGW223ds7B6wOoj_9nVC_dp9';
 

@@ -16,6 +16,7 @@ const largeLetterSpacing = 1.0;
 
 final ThemeData web296Theme = _buildShrineTheme();
 
+//TODO: Màu của icon trong web
 IconThemeData _customIconTheme(IconThemeData original) {
   return original.copyWith(color: web296Brown900);
 }
