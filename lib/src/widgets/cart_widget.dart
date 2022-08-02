@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dong_phuc_296_web/src/util/constants.dart';
 import 'package:dong_phuc_296_web/src/widgets/theme.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +13,9 @@ import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../data/model/app_state_model.dart';
+import '../data/model/category_model.dart';
 import '../data/model/order_model.dart';
+import '../data/repository/products_repository.dart';
 import '../layout/letter_spacing.dart';
 import '../util/colors.dart';
 import '../util/strings.dart';
@@ -183,29 +188,34 @@ class _CartWidgetState extends State<CartWidget> {
               primary: web296Pink100,
             ),
             onPressed: () {
-              // Utils.showTwoButtonDialog(context, cartClearQuestion, () {
-              //   setState(() {
-              //     model.clearCart();
-              //     expandingBottomSheet!.close();
+              //TODO: Check data truoc khi gui, thong bao khi thanh cong
+              // Utils.sendFCM(
+              //   context,
+              //   [fcm_token_nokia_2_3],
+              //   OrderModel(
+              //       receiverNameController.text,
+              //       receiverPhoneController.text,
+              //       receiverAddressController.text),
+              //   () => {
+              //     Utils.showTwoButtonDialog(context, cartClearQuestion, () {
+              //       setState(() {
+              //         Utils.showAlertDialog(context, orderSuccess);
+              //         model.clearCart();
+              //         expandingBottomSheet!.close();
+              //       });
+              //     })
+              //   },
+              // );
+
+              ///Test cloud firestore
+              // final ref = FirebaseFirestore.instance.collection('product');
+              // ref.get().then((QuerySnapshot querySnapshot) {
+              //   querySnapshot.docs.forEach((doc) {
+              //     print(
+              //         '------------------------CommonLog: Document data: ${doc.data()}');
               //   });
               // });
-              Utils.sendFCM(
-                context,
-                [fcm_token_nokia_2_3],
-                OrderModel(
-                    receiverNameController.text,
-                    receiverPhoneController.text,
-                    receiverAddressController.text),
-                () => {
-                  Utils.showTwoButtonDialog(context, cartClearQuestion, () {
-                    setState(() {
-                      Utils.showAlertDialog(context, orderSuccess);
-                      model.clearCart();
-                      expandingBottomSheet!.close();
-                    });
-                  })
-                },
-              );
+
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),

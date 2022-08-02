@@ -5,16 +5,19 @@
 
 import 'package:dong_phuc_296_web/src/data/model/product.dart';
 import 'package:dong_phuc_296_web/src/data/repository/products_repository.dart';
+import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../util/constants.dart';
+import '../../util/product_query_enum.dart';
+import 'category_model.dart';
 
 class AppStateModel extends Model {
   // All the available products.
   List<Product> _availableProducts = [];
 
   // The currently selected category of products.
-  Category _selectedCategory = categoryAll;
+  CategoryModel _selectedCategory = categoryAll;
 
   // The IDs and quantities of products currently in the cart.
   final Map<int, int> _productsInCart = <int, int>{};
@@ -24,12 +27,12 @@ class AppStateModel extends Model {
   // Total number of items in the cart.
   int get totalCartQuantity => _productsInCart.values.fold(0, (v, e) => v + e);
 
-  Category get selectedCategory => _selectedCategory;
+  CategoryModel get selectedCategory => _selectedCategory;
 
   // Totaled prices of the items in the cart.
   double get subtotalCost {
     return _productsInCart.keys
-        .map((id) => _availableProducts[id].price * _productsInCart[id]!)
+        .map((id) => _availableProducts[id].productPrice.valueOrZeroInt * _productsInCart[id]!)
         .fold(0.0, (sum, e) => sum + e);
   }
 
@@ -52,7 +55,7 @@ class AppStateModel extends Model {
       return List<Product>.from(_availableProducts);
     } else {
       return _availableProducts
-          .where((p) => p.category == _selectedCategory)
+          .where((p) => p.catId == _selectedCategory.catId)
           .toList();
     }
   }
@@ -96,7 +99,7 @@ class AppStateModel extends Model {
 
   // Returns the Product instance matching the provided id.
   Product getProductById(int id) {
-    return _availableProducts.firstWhere((p) => p.id == id);
+    return _availableProducts.firstWhere((p) => p.productId == id);
   }
 
   // Removes everything from the cart.
@@ -106,12 +109,12 @@ class AppStateModel extends Model {
   }
 
   // Loads the list of available products from the repo.
-  void loadProducts() {
-    _availableProducts = ProductsRepository.loadProducts(categoryAll);
+  Future<void> loadProducts() async {
+    _availableProducts = await ProductsRepository().getListProducts(categoryAll.catId, ProductQueryEnum.dateCreatedDesc);
     notifyListeners();
   }
 
-  void setCategory(Category newCategory) {
+  void setCategory(CategoryModel newCategory) {
     _selectedCategory = newCategory;
     notifyListeners();
   }

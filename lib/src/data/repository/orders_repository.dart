@@ -3,44 +3,46 @@
 // found in the LICENSE file.
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dong_phuc_296_web/src/data/model/order_model.dart';
 import 'package:dong_phuc_296_web/src/data/model/product.dart';
 import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
 
 import '../../util/product_query_enum.dart';
 import '../model/category_model.dart';
 
-class ProductsRepository {
-  static final ProductsRepository _instance = ProductsRepository._internal();
-  List<Product> lstProducts = [];
+class OrdersRepository {
+  static final OrdersRepository _instance = OrdersRepository._internal();
+  List<OrderModel> lstOrders = [];
 
-  factory ProductsRepository() {
+  factory OrdersRepository() {
     return _instance;
   }
 
-  ProductsRepository._internal() {
+  OrdersRepository._internal() {
     // initialization logic
   }
 
-  Future<List<Product>> getListProducts(
-      int categoryId, ProductQueryEnum queryEnum) async {
-    if (lstProducts.isEmpty) {
-      final data = await FirebaseFirestore.instance
-          .collection('product')
-          .queryBy(queryEnum, '')
-          .get();
-      lstProducts =
-          List.from(data.docs.map((item) => Product.fromSnapshot(item)));
-      lstProducts.forEach((element) {
-        print('------------------------CommonLog: element ${element.toJson()}');
-      });
-    }
-
-    if (categoryId == categoryAll.catId) {
-      return lstProducts;
-    } else {
-      return lstProducts.where((p) => p.catId == categoryId).toList();
-    }
-  }
+  //TODO: chưa xong, làm tiếp với order
+  // Future<List<OrderModel>> getListOrders(
+  //     int categoryId, ProductQueryEnum queryEnum) async {
+  //   if (lstOrders.isEmpty) {
+  //     final data = await FirebaseFirestore.instance
+  //         .collection('order')
+  //         .queryBy(queryEnum, '')
+  //         .get();
+  //     lstOrders =
+  //         List.from(data.docs.map((item) => OrderModel(receiverName, receiverPhone, receiverAddress).fromSnapshot(item)));
+  //     lstOrders.forEach((element) {
+  //       print('------------------------CommonLog: element ${element.toJson()}');
+  //     });
+  //   }
+  //
+  //   if (categoryId == categoryAll.catId) {
+  //     return lstProducts;
+  //   } else {
+  //     return lstProducts.where((p) => p.catId == categoryId).toList();
+  //   }
+  // }
 
   Future<Product> getProductDetail(int? productId) async {
     return await FirebaseFirestore.instance

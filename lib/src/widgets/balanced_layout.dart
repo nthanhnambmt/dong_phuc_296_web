@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../data/model/product.dart';
@@ -50,7 +51,7 @@ String _encodeParameters({
   required double smallImageWidth,
 }) {
   final productString =
-      [for (final product in products) product.id.toString()].join(',');
+      [for (final product in products) product.productId.toString()].join(',');
   return '$columnCount;$productString,$largeImageWidth,$smallImageWidth';
 }
 
@@ -215,7 +216,7 @@ List<List<Product>> balancedLayout({
 
   final productHeights = [
     for (final product in products)
-      1 / product.assetAspectRatio * (largeImageWidth + smallImageWidth) / 2 +
+      1 / product.assetAspectRatio.valueOrDoubleDefault(1) * (largeImageWidth + smallImageWidth) / 2 +
           productCardAdditionalHeight,
   ];
 

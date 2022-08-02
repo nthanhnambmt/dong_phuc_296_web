@@ -17,6 +17,7 @@ import 'package:get/get_utils/src/platform/platform.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'data/gallery_options.dart';
+import 'data/model/category_model.dart';
 import 'layout/adaptive.dart';
 import 'util/constants.dart';
 import 'layout/backdrop.dart';

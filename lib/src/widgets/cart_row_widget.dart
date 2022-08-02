@@ -1,3 +1,4 @@
+import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -34,7 +35,7 @@ class CartRowWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
-        key: ValueKey<int>(product.id),
+        key: ValueKey<int>(product.productId.valueOrZeroInt),
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildButtonAddCartItem(context),
@@ -84,7 +85,7 @@ class CartRowWidget extends StatelessWidget {
                           ),
                         ),
                         SelectableText(
-                          product.name(context),
+                          product.productName.valueOrEmptyString(),
                           style: localTheme.textTheme.subtitle1!
                               .copyWith(fontWeight: FontWeight.w600),
                           maxLines: 3,
@@ -109,7 +110,7 @@ class CartRowWidget extends StatelessWidget {
   Semantics buildButtonAddCartItem(BuildContext context) {
     return Semantics(
       container: true,
-      label: '$web296ScreenReaderAddProductButton ${product.name(context)}',
+      label: '$web296ScreenReaderAddProductButton ${product.productName}',
       button: true,
       enabled: true,
       child: ExcludeSemantics(
@@ -128,7 +129,7 @@ class CartRowWidget extends StatelessWidget {
   Semantics buildButtonRemoveCartItem(BuildContext context) {
     return Semantics(
       container: true,
-      label: '$web296ScreenReaderRemoveProductButton ${product.name(context)}',
+      label: '$web296ScreenReaderRemoveProductButton ${product.productName}',
       button: true,
       enabled: true,
       child: ExcludeSemantics(

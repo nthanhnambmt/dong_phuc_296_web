@@ -2,109 +2,67 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-import '../../util/strings.dart';
+part 'product.g.dart';
 
-class Category {
-  const Category({
-    required this.name,
-  });
-
-  // A function taking a BuildContext as input and
-  // returns the internationalized name of the category.
-  final String Function(BuildContext) name;
-}
-
-Category categoryAll = Category(
-  name: (context) => web296CategoryNameAll,
-);
-
-Category categoryClothing = Category(
-  name: (context) => web296CategoryNameClothing,
-);
-
-Category categoryUniform = Category(
-  name: (context) => web296CategoryNameUniform,
-);
-
-Category categorySport = Category(
-  name: (context) => web296CategoryNameSport,
-);
-
-Category categoryBaby = Category(
-  name: (context) => web296CategoryNameBaby,
-);
-
-Category categoryDress = Category(
-  name: (context) => web296CategoryNameDress,
-);
-
-Category categoryNightdress = Category(
-  name: (context) => web296CategoryNameNightdress,
-);
-
-Category categoryPrint = Category(
-  name: (context) => web296CategoryNamePrint,
-);
-
-Category categoryAccessories = Category(
-  name: (context) => web296CategoryNameAccessories,
-);
-
-Category categoryHome = Category(
-  name: (context) => web296CategoryNameHome,
-);
-
-Category categoryCanvas = Category(
-  name: (context) => web296CategoryNameCanvas,
-);
-
-List<Category> categories = [
-  categoryAll,
-  categoryUniform,
-  categorySport,
-  categoryBaby,
-  categoryDress,
-  categoryNightdress,
-  categoryAccessories,
-  categoryCanvas,
-  categoryPrint,
-  // categoryClothing,
-  // categoryHome,
-];
-
+@JsonSerializable()
 class Product {
-  const Product({
-    required this.category,
-    required this.id,
-    required this.isFeatured,
-    required this.name,
-    required this.price,
-    this.assetAspectRatio = 1,
+  // final CategoryModel category;
+  @JsonKey(name: 'catId', defaultValue: 1)
+  int? catId;
+  @JsonKey(name: 'catName')
+  String? catName;
+  @JsonKey(name: 'productId', defaultValue: 0)
+  int? productId;
+  @JsonKey(name: 'assetAspectRatio', defaultValue: 1.0)
+  double? assetAspectRatio;
+  @JsonKey(name: 'productName', defaultValue: 'Không tên')
+  String? productName;
+  @JsonKey(name: 'productPrice', defaultValue: 0)
+  int? productPrice;
+  @JsonKey(name: 'dateCreated')
+  Timestamp? dateCreated;
+  @JsonKey(name: 'isShow', defaultValue: true)
+  bool? isShow;
+
+  Product({
+    this.catId,
+    this.catName,
+    this.productId,
+    this.productName,
+    this.productPrice,
+    this.assetAspectRatio,
+    this.dateCreated,
+    this.isShow,
   });
 
-  final Category category;
-  final int id;
-  final bool isFeatured;
-  final double assetAspectRatio;
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
 
-  // A function taking a BuildContext as input and
-  // returns the internationalized name of the product.
-  final String Function(BuildContext) name;
-
-  final int price;
+  Map<String, dynamic> toJson() => _$ProductToJson(this);
 
   int getProductSubTotal(int? quantity) {
     int _quantity = quantity != null ? quantity : 0;
-    return this.price * _quantity;
+    return this.productPrice != null ? this.productPrice! * _quantity : 0;
   }
 
-  String get getImageName => '$id.jpg';
+  Product.fromSnapshot(snapshot)
+      : catId = snapshot.data()['catId'],
+        catName = snapshot.data()['catName'],
+        productId = snapshot.data()['productId'],
+        productName = snapshot.data()['productName'],
+        productPrice = snapshot.data()['productPrice'],
+        assetAspectRatio = snapshot.data()['assetAspectRatio'],
+        dateCreated = snapshot.data()['dateCreated'];
+
+  String get getImageName => '$productId.jpg';
 
   String get getThumbNail => 'product_images';
 
   String get getImage2x => 'product_images/2x';
 
   String get getImage3x => 'product_images/3x';
+
 }

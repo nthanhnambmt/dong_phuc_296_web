@@ -14,6 +14,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../data/gallery_options.dart';
+import '../data/model/category_model.dart';
+import '../data/model/product.dart';
 import '../layout/text_scale.dart';
 import '../widgets/dialog_button_widget.dart';
 import 'constants.dart';
@@ -676,5 +678,106 @@ class Utils {
         print(e);
       }
     });
+  }
+
+  static List<Product> getListProductToAddCloud() {
+    return [
+      Product(
+        catId: categoryPrint.catId,
+        catName: categoryPrint.catName,
+        productId: 0,
+        productName: inBenHongAo,
+        productPrice: 50000,
+        assetAspectRatio: 211 / 199,
+      ),
+      Product(
+        catId: categorySport.catId,
+        catName: categorySport.catName,
+        productId: 1,
+        productName: aoBongBan,
+        productPrice: 180000,
+        assetAspectRatio: 514 / 680,
+      ),
+      Product(
+        catId: categorySport.catId,
+        catName: categorySport.catName,
+        productId: 2,
+        productName: aoBongBan,
+        productPrice: 180000,
+        assetAspectRatio: 582 / 793,
+      ),
+      Product(
+        catId: categoryCanvas.catId,
+        catName: categoryCanvas.catName,
+        productId: 3,
+        productName: tuiCanVas,
+        productPrice: 120000,
+        assetAspectRatio: 310 / 413,
+      ),
+      Product(
+        catId: categoryCanvas.catId,
+        catName: categoryCanvas.catName,
+        productId: 4,
+        productName: tuiCanVas,
+        productPrice: 120000,
+        assetAspectRatio: 273 / 405,
+      ),
+      Product(
+        catId: categoryCanvas.catId,
+        catName: categoryCanvas.catName,
+        productId: 5,
+        productName: tuiCanVas,
+        productPrice: 120000,
+        assetAspectRatio: 273 / 442,
+      ),
+      Product(
+        catId: categoryCanvas.catId,
+        catName: categoryCanvas.catName,
+        productId: 6,
+        productName: tuiCanVas,
+        productPrice: 120000,
+        assetAspectRatio: 253 / 415,
+      ),
+      Product(
+        catId: categoryUniform.catId,
+        catName: categoryUniform.catName,
+        productId: 7,
+        productName: aoPoloNam,
+        productPrice: 140000,
+        assetAspectRatio: 305 / 419,
+      ),
+      Product(
+        catId: categoryUniform.catId,
+        catName: categoryUniform.catName,
+        productId: 8,
+        productName: aoPoloNam,
+        productPrice: 160000,
+        assetAspectRatio: 251 / 406,
+      ),
+      Product(
+        catId: categoryUniform.catId,
+        catName: categoryUniform.catName,
+        productId: 9,
+        productName: aoPoloNu,
+        productPrice: 150000,
+        assetAspectRatio: 326 / 348,
+      ),
+      Product(
+        catId: categoryUniform.catId,
+        catName: categoryUniform.catName,
+        productId: 10,
+        productName: aoPoloNam,
+        productPrice: 150000,
+        assetAspectRatio: 329 / 246,
+      ),
+      Product(
+        catId: categoryPrint.catId,
+        catName: categoryPrint.catName,
+        productId: 11,
+        productName: inHinh3040,
+        productPrice: 40000,
+        assetAspectRatio: 329 / 246,
+      ),
+    ];
   }
 }

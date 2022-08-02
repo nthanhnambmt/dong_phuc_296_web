@@ -6,89 +6,15 @@ import 'dart:io';
 
 import 'package:dong_phuc_296_web/src/app.dart'
     deferred as web296;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:window_size/window_size.dart';
+import 'package:window_size/window_size.dart';import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'firebase_options.dart';
 import 'src/widgets/deferred_widget.dart';
-
-// class StudyWrapper extends StatefulWidget {
-//   const StudyWrapper({
-//     super.key,
-//     required this.study,
-//     this.alignment = AlignmentDirectional.bottomStart,
-//     this.hasBottomNavBar = false,
-//   });
-//
-//   final Widget study;
-//   final bool hasBottomNavBar;
-//   final AlignmentDirectional alignment;
-//
-//   @override
-//   State<StudyWrapper> createState() => _StudyWrapperState();
-// }
-//
-// class _StudyWrapperState extends State<StudyWrapper> {
-//   @override
-//   Widget build(BuildContext context) {
-//     final colorScheme = Theme.of(context).colorScheme;
-//     final textTheme = Theme.of(context).textTheme;
-//     return ApplyTextOptions(
-//       child: Stack(
-//         children: [
-//           Semantics(
-//             sortKey: const OrdinalSortKey(1),
-//             child: RestorationScope(
-//               restorationId: 'study_wrapper',
-//               child: widget.study,
-//             ),
-//           ),
-//           if (!isDisplayFoldable(context))
-//             SafeArea(
-//               child: Align(
-//                 alignment: widget.alignment,
-//                 child: Padding(
-//                   padding: EdgeInsets.symmetric(
-//                       horizontal: 16.0,
-//                       vertical: widget.hasBottomNavBar
-//                           ? kBottomNavigationBarHeight + 16.0
-//                           : 16.0),
-//                   child: Semantics(
-//                     sortKey: const OrdinalSortKey(0),
-//                     label: backToGallery,
-//                     button: true,
-//                     enabled: true,
-//                     excludeSemantics: true,
-//                     child: FloatingActionButton.extended(
-//                       heroTag: _BackButtonHeroTag(),
-//                       key: const ValueKey('Back'),
-//                       onPressed: () {
-//                         Navigator.of(context)
-//                             .popUntil((route) => route.settings.name == '/');
-//                       },
-//                       icon: IconTheme(
-//                         data: IconThemeData(color: colorScheme.onPrimary),
-//                         child: const BackButtonIcon(),
-//                       ),
-//                       label: Text(
-//                         MaterialLocalizations.of(context).backButtonTooltip,
-//                         style: textTheme.button!
-//                             .apply(color: colorScheme.onPrimary),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-//
-// class _BackButtonHeroTag {}
 
 Future<void> main() async {
   // Use package:url_strategy until this pull request is released:
@@ -102,12 +28,9 @@ Future<void> main() async {
   setHashUrlStrategy();
   // setPathUrlStrategy();
 
-  //TODO: tạm bỏ
-  // setupWindow();
-
-  // runApp(const DongPhuc296Web());
-  // runApp(const ShrineApp());
-  // GoogleFonts.config.allowRuntimeFetching = false;
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(new MediaQuery(
       data: new MediaQueryData(),

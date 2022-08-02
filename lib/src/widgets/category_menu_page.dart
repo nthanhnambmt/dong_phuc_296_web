@@ -9,6 +9,7 @@ import 'package:dong_phuc_296_web/src/widgets/web_296_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../data/gallery_options.dart';
+import '../data/model/category_model.dart';
 import '../layout/adaptive.dart';
 import '../util/strings.dart';
 import '../app.dart';
@@ -48,10 +49,10 @@ class CategoryMenuPage extends StatelessWidget {
     );
   }
 
-  Widget _buildCategory(Category category, BuildContext context) {
+  Widget _buildCategory(CategoryModel category, BuildContext context) {
     final isDesktop = isDisplayDesktop(context);
 
-    final categoryString = category.name(context);
+    final categoryString = category.catName;
 
     final selectedCategoryTextStyle = Theme.of(context)
         .textTheme

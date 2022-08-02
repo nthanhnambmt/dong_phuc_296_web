@@ -2,10 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
-
 import '../layout/adaptive.dart';
 import '../layout/image_placeholder.dart';
 import '../util/constants.dart';
@@ -83,7 +83,7 @@ Widget _buildProductCard({
     placeholder: Container(
       color: Colors.black.withOpacity(0.1),
       width: imageWidth,
-      height: imageWidth == null ? null : imageWidth / product.assetAspectRatio,
+      height: imageWidth == null ? null : imageWidth / product.assetAspectRatio.valueOrDoubleDefault(1),
     ),
     fit: BoxFit.cover,
     width: isDesktop ? imageWidth : null,
@@ -99,7 +99,7 @@ Widget _buildProductCard({
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
-              model.addProductToCart(product.id);
+              model.addProductToCart(product.productId.valueOrZeroInt);
             },
             child: child,
           ),
@@ -126,16 +126,22 @@ Widget _buildProductCard({
                   const SizedBox(height: 23),
                   SizedBox(
                     width: imageWidth,
-                    child: Text(
-                      product.name(context),
+                    child:
+                    SelectableText(
+                      product.productName.valueOrEmptyString(),
                       style: theme.textTheme.button,
-                      softWrap: true,
                       textAlign: TextAlign.center,
                     ),
+                    // Text(
+                    //   product.productName.valueOrEmptyString,
+                    //   style: theme.textTheme.button,
+                    //   softWrap: true,
+                    //   textAlign: TextAlign.center,
+                    // ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    formatter.format(product.price),
+                    formatter.format(product.productPrice),
                     style: theme.textTheme.caption,
                   ),
                 ],
