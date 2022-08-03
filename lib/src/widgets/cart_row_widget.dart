@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../data/model/product.dart';
+import '../data/model/product_model.dart';
 import '../util/colors.dart';
 import '../util/constants.dart';
 import '../util/strings.dart';
@@ -19,7 +19,7 @@ class CartRowWidget extends StatelessWidget {
   });
 
   final double startColumnWidth;
-  final Product product;
+  final ProductModel product;
   final int? quantity;
   final VoidCallback? onRemoveCartItemPressed;
   final VoidCallback? onAddCartItemPressed;

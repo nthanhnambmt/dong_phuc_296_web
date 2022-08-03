@@ -6,3 +6,9 @@ enum ProductQueryEnum {
   priceDesc,
   priceAsc,
 }
+
+enum OrderQueryEnum {
+  id,
+  dateCreatedDesc,
+  dateCreatedAsc,
+}

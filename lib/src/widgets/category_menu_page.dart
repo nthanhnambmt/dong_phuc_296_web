@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:dong_phuc_296_web/src/layout/text_scale.dart';
-import 'package:dong_phuc_296_web/src/data/model/product.dart';
+import 'package:dong_phuc_296_web/src/data/model/product_model.dart';
 import 'package:dong_phuc_296_web/src/widgets/page_status.dart';
 import 'package:dong_phuc_296_web/src/widgets/web_296_logo_widget.dart';
 import 'package:flutter/material.dart';

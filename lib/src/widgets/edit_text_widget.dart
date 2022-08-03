@@ -1,17 +1,20 @@
 import 'package:dong_phuc_296_web/src/widgets/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../layout/letter_spacing.dart';
 import '../screen/intro_screen.dart';
 import '../util/colors.dart';
-import '../util/strings.dart';
 
 class EditTextWidget extends StatelessWidget {
-  const EditTextWidget(this.hintText, this.myController);
+  const EditTextWidget(
+      {required this.hintText, required this.myController, this.inputFormatters, this.validator});
 
   final String hintText;
   final TextEditingController myController;
+  final List<TextInputFormatter>? inputFormatters;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +22,11 @@ class EditTextWidget extends StatelessWidget {
 
     return PrimaryColorOverride(
       color: web296Brown900,
-      child: TextField(
+      child: TextFormField(
         controller: myController,
         textInputAction: TextInputAction.next,
-        restorationId: 'username_text_field',
         cursorColor: colorScheme.onSurface,
+        validator: validator,
         decoration: InputDecoration(
           labelText: hintText,
           labelStyle: TextStyle(

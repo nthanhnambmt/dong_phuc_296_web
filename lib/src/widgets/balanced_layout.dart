@@ -5,7 +5,7 @@
 import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 
-import '../data/model/product.dart';
+import '../data/model/product_model.dart';
 import 'desktop_product_columns.dart';
 import 'layout_cache.dart';
 
@@ -46,7 +46,7 @@ List<_TaggedHeightData> _toListAndAddEmpty(Set<_TaggedHeightData> set) {
 /// Encode parameters for caching.
 String _encodeParameters({
   required int columnCount,
-  required List<Product> products,
+  required List<ProductModel> products,
   required double largeImageWidth,
   required double smallImageWidth,
 }) {
@@ -56,8 +56,8 @@ String _encodeParameters({
 }
 
 /// Given a layout, replace integers by their corresponding products.
-List<List<Product>> _generateLayout({
-  required List<Product> products,
+List<List<ProductModel>> _generateLayout({
+  required List<ProductModel> products,
   required List<List<int>> layout,
 }) {
   return [
@@ -192,10 +192,10 @@ List<List<int>> _balancedDistribution({
 /// where the larger images have width [largeImageWidth]
 /// and the smaller images have width [smallImageWidth].
 /// The current [context] is also given to allow caching.
-List<List<Product>> balancedLayout({
+List<List<ProductModel>> balancedLayout({
   required BuildContext context,
   required int columnCount,
-  required List<Product> products,
+  required List<ProductModel> products,
   required double largeImageWidth,
   required double smallImageWidth,
 }) {

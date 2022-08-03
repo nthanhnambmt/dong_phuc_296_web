@@ -2,26 +2,24 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dong_phuc_296_web/src/data/model/order_model.dart';
+import 'package:dong_phuc_296_web/src/data/model/status_model.dart';
 import 'package:dong_phuc_296_web/src/util/constants.dart';
 import 'package:dong_phuc_296_web/src/widgets/theme.dart';
+import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
-
 import '../data/model/app_state_model.dart';
-import '../data/model/category_model.dart';
-import '../data/model/order_model.dart';
-import '../data/repository/products_repository.dart';
+import '../data/repository/orders_repository.dart';
 import '../layout/letter_spacing.dart';
 import '../util/colors.dart';
+import '../util/query_enum.dart';
 import '../util/strings.dart';
 import '../util/utils.dart';
-import 'EditTextWidget.dart';
 import 'cart_row_widget.dart';
+import 'edit_text_widget.dart';
 import 'expanding_bottom_sheet.dart';
 
 const _startColumnWidth = 60.0;
@@ -39,6 +37,9 @@ class _CartWidgetState extends State<CartWidget> {
   final receiverPhoneController = TextEditingController();
   final receiverAddressController = TextEditingController();
 
+  //This key will be used to identify the state of the form.
+  final formKey = GlobalKey<FormState>();
+
   List<Widget> _createShoppingCartRows(AppStateModel model) {
     return model.productsInCart.keys
         .map(
@@ -55,6 +56,14 @@ class _CartWidgetState extends State<CartWidget> {
           ),
         )
         .toList();
+  }
+
+  @override
+  void dispose() {
+    receiverNameController.dispose();
+    receiverPhoneController.dispose();
+    receiverAddressController.dispose();
+    super.dispose();
   }
 
   @override
@@ -144,29 +153,56 @@ class _CartWidgetState extends State<CartWidget> {
         width: double.infinity,
         child: Semantics(
           sortKey: const OrdinalSortKey(3, name: _ordinalSortKeyName),
-          child: Column(
-            children: [
-              Text(
-                receiverInfo,
-                style: localTheme.textTheme.subtitle1!
-                    .copyWith(fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              EditTextWidget(receiverName, receiverNameController),
-              SizedBox(
-                height: 10,
-              ),
-              EditTextWidget(receiverPhone, receiverPhoneController),
-              SizedBox(
-                height: 10,
-              ),
-              EditTextWidget(receiverAddress, receiverAddressController),
-              SizedBox(
-                height: 10,
-              ),
-            ],
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                Text(
+                  receiverInfo,
+                  style: localTheme.textTheme.subtitle1!
+                      .copyWith(fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                EditTextWidget(
+                  hintText: receiverName,
+                  myController: receiverNameController,
+                  validator: (val) {
+                    if (!val.valueOrEmptyString().isValidName)
+                      return '$enterValidText $receiverName';
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                EditTextWidget(
+                  hintText: receiverPhone,
+                  myController: receiverPhoneController,
+                  validator: (val) {
+                    if (!val.valueOrEmptyString().isValidPhone)
+                      return '$enterValidText $receiverPhone hợp lệ';
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                EditTextWidget(
+                  hintText: receiverAddress,
+                  myController: receiverAddressController,
+                  validator: (val) {
+                    if (val.valueOrEmptyString().isEmpty)
+                      return '$enterValidText $receiverAddress';
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
           ),
         ));
   }
@@ -187,7 +223,7 @@ class _CartWidgetState extends State<CartWidget> {
               ),
               primary: web296Pink100,
             ),
-            onPressed: () {
+            onPressed: () async {
               //TODO: Check data truoc khi gui, thong bao khi thanh cong
               // Utils.sendFCM(
               //   context,
@@ -208,14 +244,32 @@ class _CartWidgetState extends State<CartWidget> {
               // );
 
               ///Test cloud firestore
-              // final ref = FirebaseFirestore.instance.collection('product');
+              // final ref = FirebaseFirestore.instance.collection(orderDocument);
               // ref.get().then((QuerySnapshot querySnapshot) {
               //   querySnapshot.docs.forEach((doc) {
               //     print(
               //         '------------------------CommonLog: Document data: ${doc.data()}');
               //   });
               // });
+              print(
+                  '------------------------CommonLog: formKey.currentState!.validate(): ${formKey.currentState!.validate()}');
 
+              if (formKey.currentState!.validate()) {
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (_) => SuccessPage(),
+                //   ),
+                // );
+                await OrdersRepository().setNewOrder(OrderModel(
+                  orderId: DateTime.now().millisecondsSinceEpoch,
+                  receiverName: receiverNameController.text,
+                  receiverPhone: receiverPhoneController.text,
+                  receiverAddress: receiverAddressController.text,
+                  status:  StatusModel(statusId: 1, statusName: ''),
+                  dateCreated: DateTime.now(),
+                  isDeleted: false,
+                ));
+              }
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),

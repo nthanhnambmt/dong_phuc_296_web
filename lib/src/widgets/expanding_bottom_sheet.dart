@@ -9,12 +9,12 @@ import 'package:dong_phuc_296_web/src/widgets/cart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import '../data/model/product_model.dart';
 import '../layout/adaptive.dart';
 import '../layout/text_scale.dart';
 import '../util/strings.dart';
 import '../util/colors.dart';
 import '../data/model/app_state_model.dart';
-import '../data/model/product.dart';
 
 // These curves define the emphasized easing curve.
 const Cubic _accelerateCurve = Cubic(0.548, 0, 0.757, 0.464);
@@ -595,7 +595,7 @@ class _ProductThumbnailRowState extends State<ProductThumbnailRow> {
     _internalList = List<int>.from(_list.list);
   }
 
-  Product _productWithId(int productId) {
+  ProductModel _productWithId(int productId) {
     final model = ScopedModel.of<AppStateModel>(context);
     final product = model.getProductById(productId);
     return product;
@@ -733,7 +733,7 @@ class ProductThumbnail extends StatelessWidget {
 
   final Animation<double> animation;
   final Animation<double> opacityAnimation;
-  final Product product;
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import 'dart:math';
 import 'package:dong_phuc_296_web/src/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
-import '../data/model/product.dart';
+import '../data/model/product_model.dart';
 
 
 /// Height of the text below each product card.
@@ -30,7 +30,7 @@ class DesktopProductCardColumn extends StatelessWidget {
     required this.smallImageWidth,
   });
 
-  final List<Product> products;
+  final List<ProductModel> products;
 
   final bool alignToEnd;
   final bool startLarge;

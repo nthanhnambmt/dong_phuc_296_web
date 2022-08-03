@@ -4,10 +4,11 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dong_phuc_296_web/src/data/model/order_model.dart';
-import 'package:dong_phuc_296_web/src/data/model/product.dart';
+import 'package:dong_phuc_296_web/src/data/model/product_model.dart';
 import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
 
-import '../../util/product_query_enum.dart';
+import '../../util/constants.dart';
+import '../../util/query_enum.dart';
 import '../model/category_model.dart';
 
 class OrdersRepository {
@@ -22,128 +23,125 @@ class OrdersRepository {
     // initialization logic
   }
 
-  //TODO: chưa xong, làm tiếp với order
-  // Future<List<OrderModel>> getListOrders(
-  //     int categoryId, ProductQueryEnum queryEnum) async {
-  //   if (lstOrders.isEmpty) {
-  //     final data = await FirebaseFirestore.instance
-  //         .collection('order')
-  //         .queryBy(queryEnum, '')
-  //         .get();
-  //     lstOrders =
-  //         List.from(data.docs.map((item) => OrderModel(receiverName, receiverPhone, receiverAddress).fromSnapshot(item)));
-  //     lstOrders.forEach((element) {
-  //       print('------------------------CommonLog: element ${element.toJson()}');
-  //     });
-  //   }
-  //
-  //   if (categoryId == categoryAll.catId) {
-  //     return lstProducts;
-  //   } else {
-  //     return lstProducts.where((p) => p.catId == categoryId).toList();
-  //   }
-  // }
+  Future<List<OrderModel>> getListOrders(OrderQueryEnum queryEnum) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection(orderDocument)
+          .queryBy(queryEnum, '')
+          .get()
+          .then((value) => {
+                lstOrders = List.from(
+                    value.docs.map((item) => OrderModel.fromSnapshot(item)))
+              });
 
-  Future<Product> getProductDetail(int? productId) async {
+      lstOrders.forEach((element) {
+        print(
+            '------------------------CommonLog: lstOrders element ${element.toJson()}');
+      });
+    } catch (e) {
+      print('------------------------CommonLog: lstOrders element error $e');
+    }
+
+    return lstOrders;
+  }
+
+  Future<OrderModel> getOrderDetail(int? orderId) async {
     return await FirebaseFirestore.instance
-        .collection('product')
-        .doc(productId.valueOrZeroInt.toString())
+        .collection(orderDocument)
+        .doc(orderId.valueOrZeroInt.toString())
         .get()
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
-        return Product.fromSnapshot(documentSnapshot);
+        return OrderModel.fromSnapshot(documentSnapshot);
       } else {
-        return Product();
+        return OrderModel();
       }
-    }).catchError((error) => Product());
+    }).catchError((error) => OrderModel());
   }
 
   ///Document ID là auto-ID của firebase
-  Future<void> addNewProduct(Product newProduct) {
+  Future<void> addNewOrder(OrderModel newOrder) {
     return FirebaseFirestore.instance
-        .collection('product')
+        .collection(orderDocument)
         .add({
-          'catId': newProduct.catId,
-          'catName': newProduct.catName,
-          'productId': newProduct.productId,
-          'productName': newProduct.productName,
-          'productPrice': newProduct.productPrice,
-          'assetAspectRatio': newProduct.assetAspectRatio,
-          'dateCreated': newProduct.dateCreated,
+          'orderId': newOrder.orderId,
+          'receiverName': newOrder.receiverName,
+          'receiverPhone': newOrder.receiverPhone,
+          'receiverAddress': newOrder.receiverAddress,
+          'dateCreated': newOrder.dateCreated,
+          'isDeleted': newOrder.isDeleted,
+          'statusId': newOrder.status?.statusId.valueOrZeroInt,
         })
-        .then((value) => print("Product ${newProduct.productName} Added"))
-        .catchError((error) => print("Failed to add Product: $error"));
+        .then((value) => print(
+            "------------------------CommonLog: Order ${newOrder.orderId} Added"))
+        .catchError((error) => print(
+            "------------------------CommonLog: Failed to addNewOrder: $error"));
   }
 
   ///Set được Document ID
-  Future<void> setNewProduct(Product newProduct) {
+  Future<void> setNewOrder(OrderModel newOrder) {
     return FirebaseFirestore.instance
-        .collection('product')
-        .doc(newProduct.productId.toString())
+        .collection(orderDocument)
+        .doc(newOrder.orderId.toString())
         .set({
-          'catId': newProduct.catId,
-          'catName': newProduct.catName,
-          'productId': newProduct.productId,
-          'productName': newProduct.productName,
-          'productPrice': newProduct.productPrice,
-          'assetAspectRatio': newProduct.assetAspectRatio,
-          'dateCreated': newProduct.dateCreated,
+          'orderId': newOrder.orderId,
+          'receiverName': newOrder.receiverName,
+          'receiverPhone': newOrder.receiverPhone,
+          'receiverAddress': newOrder.receiverAddress,
+          'dateCreated': Timestamp.fromMicrosecondsSinceEpoch(newOrder.dateCreated!.microsecondsSinceEpoch.valueOrZeroInt),
+          'isDeleted': newOrder.isDeleted,
+          'statusId': newOrder.status?.statusId.valueOrZeroInt,
         })
-        .then((value) => print("Product ${newProduct.productName} Added"))
-        .catchError((error) => print("Failed to add Product: $error"));
+        .then((value) => print(
+            "------------------------CommonLog: Order ${newOrder.orderId} set"))
+        .catchError((error) => print(
+            "------------------------CommonLog: Failed to setNewOrder: $error"));
   }
 
-  Future<void> updateProduct(Product newProduct) {
+  Future<void> updateOrder(OrderModel newOrder) {
     return FirebaseFirestore.instance
-        .collection('product')
-        .doc(newProduct.productId.toString())
+        .collection(orderDocument)
+        .doc(newOrder.orderId.toString())
         .update({
-          'catId': newProduct.catId,
-          'catName': newProduct.catName,
-          'productId': newProduct.productId,
-          'productName': newProduct.productName,
-          'productPrice': newProduct.productPrice,
-          'assetAspectRatio': newProduct.assetAspectRatio,
+          'orderId': newOrder.orderId,
+          'receiverName': newOrder.receiverName,
+          'receiverPhone': newOrder.receiverPhone,
+          'receiverAddress': newOrder.receiverAddress,
+          'dateCreated': newOrder.dateCreated,
+          'isDeleted': newOrder.isDeleted,
+          'statusId': newOrder.status?.statusId.valueOrZeroInt,
         })
-        .then((value) => print("Product ${newProduct.productName} Added"))
-        .catchError((error) => print("Failed to add Product: $error"));
+        .then((value) => print(
+        "------------------------CommonLog: Order ${newOrder.orderId} updated"))
+        .catchError((error) => print(
+        "------------------------CommonLog: Failed to updateOrder: $error"));
   }
 
-  Future<void> deleteProduct(Product product) {
+  Future<void> deleteOrder(OrderModel orderModel) {
     return FirebaseFirestore.instance
-        .collection('product')
-        .doc(product.productId.toString())
+        .collection(orderDocument)
+        .doc(orderModel.orderId.toString())
         .delete()
-        .then((value) => print("Product ${product.productName} deleted"))
-        .catchError((error) => print("Failed to delete Product: $error"));
+        .then((value) => print(
+        "------------------------CommonLog: Order ${orderModel.orderId} deleted"))
+        .catchError((error) => print(
+        "------------------------CommonLog: Failed to deleteOrder: $error"));
   }
 }
 
 extension on CollectionReference {
-  /// Create a firebase query from a [ProductQueryEnum]
-  Query<Object?> queryBy(ProductQueryEnum queryEnum, Object query) {
+  /// Create a firebase query from a [OrderQueryEnum]
+  Query<Object?> queryBy(OrderQueryEnum queryEnum, Object query) {
     switch (queryEnum) {
-      case ProductQueryEnum.name:
-        return where('productName', isEqualTo: query)
-            .where('isShow', isEqualTo: true);
+      case OrderQueryEnum.id:
+        return where('orderId', isEqualTo: query)
+            .where('isDeleted', isEqualTo: false);
 
-      case ProductQueryEnum.categoryId:
-        return where('catId', isEqualTo: query)
-            .where('isShow', isEqualTo: true);
-
-      case ProductQueryEnum.id:
-        return where('productId', isEqualTo: query)
-            .where('isShow', isEqualTo: true);
-
-      case ProductQueryEnum.dateCreatedDesc:
-        return orderBy('dateCreated', descending: true)
-            .where('isShow', isEqualTo: true);
-
-      case ProductQueryEnum.priceAsc:
-      case ProductQueryEnum.priceDesc:
-        return orderBy('productPrice',
-                descending: query == ProductQueryEnum.priceDesc)
-            .where('isShow', isEqualTo: true);
+      case OrderQueryEnum.dateCreatedDesc:
+      case OrderQueryEnum.dateCreatedAsc:
+        return orderBy('dateCreated',
+                descending: query == OrderQueryEnum.dateCreatedDesc)
+            .where('isDeleted', isEqualTo: false);
     }
   }
 }

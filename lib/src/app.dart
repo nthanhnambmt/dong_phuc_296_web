@@ -26,7 +26,7 @@ import 'widgets/expanding_bottom_sheet.dart';
 import 'screen/home_screen.dart';
 import 'screen/login_screen.dart';
 import 'data/model/app_state_model.dart';
-import 'data/model/product.dart';
+import 'data/model/product_model.dart';
 import 'package:dong_phuc_296_web/src/routing/routes.dart' as routes;
 
 class ShrineApp extends StatefulWidget {

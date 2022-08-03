@@ -1,10 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
-import 'package:get/get_navigation/src/root/internacionalization.dart';
 import 'package:intl/intl.dart';
-
-
 
 extension StringExtension on String {
   int? get toInt {
@@ -38,6 +35,30 @@ extension StringExtension on String {
     } catch (E) {
       return this;
     }
+  }
+
+  bool get isValidEmail {
+    final emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    return emailRegExp.hasMatch(this);
+  }
+
+  bool get isValidName{
+    return this.isNotNullEmpty;
+  }
+
+  bool get isValidPassword{
+    final passwordRegExp =
+    RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\><*~]).{8,}/pre>');
+    return passwordRegExp.hasMatch(this);
+  }
+
+  bool get isNotNull{
+    return this!=null;
+  }
+
+  bool get isValidPhone{
+    final phoneRegExp = RegExp(r'(84|\+84|0)[3|5|7|8|9]+[0-9]{8}$');
+    return phoneRegExp.hasMatch(this);
   }
 }
 

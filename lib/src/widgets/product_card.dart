@@ -11,7 +11,7 @@ import '../layout/image_placeholder.dart';
 import '../util/constants.dart';
 import '../util/strings.dart';
 import '../data/model/app_state_model.dart';
-import '../data/model/product.dart';
+import '../data/model/product_model.dart';
 
 class MobileProductCard extends StatelessWidget {
   const MobileProductCard({
@@ -21,7 +21,7 @@ class MobileProductCard extends StatelessWidget {
   }) : assert(imageAspectRatio > 0);
 
   final double imageAspectRatio;
-  final Product product;
+  final ProductModel product;
 
   static const double defaultTextBoxHeight = 65;
 
@@ -47,7 +47,7 @@ class DesktopProductCard extends StatelessWidget {
     required this.imageWidth,
   });
 
-  final Product product;
+  final ProductModel product;
   final double imageWidth;
 
   @override
@@ -62,7 +62,7 @@ class DesktopProductCard extends StatelessWidget {
 
 Widget _buildProductCard({
   required BuildContext context,
-  required Product product,
+  required ProductModel product,
   double? imageWidth,
   double? imageAspectRatio,
 }) {

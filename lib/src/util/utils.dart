@@ -15,7 +15,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 import '../data/gallery_options.dart';
 import '../data/model/category_model.dart';
-import '../data/model/product.dart';
+import '../data/model/product_model.dart';
 import '../layout/text_scale.dart';
 import '../widgets/dialog_button_widget.dart';
 import 'constants.dart';
@@ -39,7 +39,7 @@ class Utils {
   // double screenHeight = Get.height;
   // double screenWidth = Get.width;
 
-  static int getProductGridItem() {
+  static int getProductModelGridItem() {
     try {
       if (GetPlatform.isMobile) {
         return 2;
@@ -680,9 +680,9 @@ class Utils {
     });
   }
 
-  static List<Product> getListProductToAddCloud() {
+  static List<ProductModel> getListProductModelToAddCloud() {
     return [
-      Product(
+      ProductModel(
         catId: categoryPrint.catId,
         catName: categoryPrint.catName,
         productId: 0,
@@ -690,7 +690,7 @@ class Utils {
         productPrice: 50000,
         assetAspectRatio: 211 / 199,
       ),
-      Product(
+      ProductModel(
         catId: categorySport.catId,
         catName: categorySport.catName,
         productId: 1,
@@ -698,7 +698,7 @@ class Utils {
         productPrice: 180000,
         assetAspectRatio: 514 / 680,
       ),
-      Product(
+      ProductModel(
         catId: categorySport.catId,
         catName: categorySport.catName,
         productId: 2,
@@ -706,7 +706,7 @@ class Utils {
         productPrice: 180000,
         assetAspectRatio: 582 / 793,
       ),
-      Product(
+      ProductModel(
         catId: categoryCanvas.catId,
         catName: categoryCanvas.catName,
         productId: 3,
@@ -714,7 +714,7 @@ class Utils {
         productPrice: 120000,
         assetAspectRatio: 310 / 413,
       ),
-      Product(
+      ProductModel(
         catId: categoryCanvas.catId,
         catName: categoryCanvas.catName,
         productId: 4,
@@ -722,7 +722,7 @@ class Utils {
         productPrice: 120000,
         assetAspectRatio: 273 / 405,
       ),
-      Product(
+      ProductModel(
         catId: categoryCanvas.catId,
         catName: categoryCanvas.catName,
         productId: 5,
@@ -730,7 +730,7 @@ class Utils {
         productPrice: 120000,
         assetAspectRatio: 273 / 442,
       ),
-      Product(
+      ProductModel(
         catId: categoryCanvas.catId,
         catName: categoryCanvas.catName,
         productId: 6,
@@ -738,7 +738,7 @@ class Utils {
         productPrice: 120000,
         assetAspectRatio: 253 / 415,
       ),
-      Product(
+      ProductModel(
         catId: categoryUniform.catId,
         catName: categoryUniform.catName,
         productId: 7,
@@ -746,7 +746,7 @@ class Utils {
         productPrice: 140000,
         assetAspectRatio: 305 / 419,
       ),
-      Product(
+      ProductModel(
         catId: categoryUniform.catId,
         catName: categoryUniform.catName,
         productId: 8,
@@ -754,7 +754,7 @@ class Utils {
         productPrice: 160000,
         assetAspectRatio: 251 / 406,
       ),
-      Product(
+      ProductModel(
         catId: categoryUniform.catId,
         catName: categoryUniform.catName,
         productId: 9,
@@ -762,7 +762,7 @@ class Utils {
         productPrice: 150000,
         assetAspectRatio: 326 / 348,
       ),
-      Product(
+      ProductModel(
         catId: categoryUniform.catId,
         catName: categoryUniform.catName,
         productId: 10,
@@ -770,7 +770,7 @@ class Utils {
         productPrice: 150000,
         assetAspectRatio: 329 / 246,
       ),
-      Product(
+      ProductModel(
         catId: categoryPrint.catId,
         catName: categoryPrint.catName,
         productId: 11,

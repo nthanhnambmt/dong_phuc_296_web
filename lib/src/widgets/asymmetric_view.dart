@@ -10,10 +10,10 @@ import 'package:flutter/material.dart';
 
 
 import '../data/gallery_options.dart';
+import '../data/model/product_model.dart';
 import '../layout/text_scale.dart';
 import 'balanced_layout.dart';
 import 'category_menu_page.dart';
-import '../data/model/product.dart';
 import 'page_status.dart';
 import 'desktop_product_columns.dart';
 
@@ -28,7 +28,7 @@ class MobileAsymmetricView extends StatelessWidget {
     required this.products,
   });
 
-  final List<Product> products;
+  final List<ProductModel> products;
 
   List<SizedBox> _buildColumns(
     BuildContext context,
@@ -171,7 +171,7 @@ class DesktopAsymmetricView extends StatelessWidget {
     required this.products,
   });
 
-  final List<Product> products;
+  final List<ProductModel> products;
 
   @override
   Widget build(BuildContext context) {
@@ -237,7 +237,7 @@ class DesktopColumns extends StatelessWidget {
   });
 
   final int columnCount;
-  final List<Product> products;
+  final List<ProductModel> products;
   final double largeImageWidth;
   final double smallImageWidth;
 

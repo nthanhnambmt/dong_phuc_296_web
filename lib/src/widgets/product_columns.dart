@@ -5,7 +5,7 @@
 import 'package:dong_phuc_296_web/src/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
-import '../data/model/product.dart';
+import '../data/model/product_model.dart';
 
 
 class TwoProductCardColumn extends StatelessWidget {
@@ -19,8 +19,8 @@ class TwoProductCardColumn extends StatelessWidget {
   static const double spacerHeight = 44;
   static const double horizontalPadding = 28;
 
-  final Product bottom;
-  final Product? top;
+  final ProductModel bottom;
+  final ProductModel? top;
   final double imageAspectRatio;
 
   @override
@@ -61,7 +61,7 @@ class OneProductCardColumn extends StatelessWidget {
     required this.reverse,
   });
 
-  final Product product;
+  final ProductModel product;
 
   // Whether the product column should align to the bottom.
   final bool reverse;

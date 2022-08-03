@@ -26,10 +26,14 @@ const splashPageAnimationDurationInMilliseconds = 300;
 // The desktop top padding for a page's first header (e.g. Gallery, Settings)
 const firstHeaderDesktopTopPadding = 5.0;
 
-//Phí ship, thuế
+///Phí ship, thuế
 const double salesTaxRate = 0;
 const double shippingFee = 0;
 const double shippingFeeCostPerItem = 2000;
 
 const Locale vnLocales = Locale('vi');
 const Locale enLocales = Locale('en');
+
+///Firebase Cloud filestore
+const String orderDocument = 'order';
+const String productDocument = 'product';

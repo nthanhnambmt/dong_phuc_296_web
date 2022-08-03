@@ -183,6 +183,7 @@ const String web296ScreenReaderAddProductButton =
 const String web296TooltipRemoveItem = 'Xóa';
 // /// **'Remove item in cart'**
 const String web296TooltipAddItem = 'Thêm';
+const String enterValidText = 'Vui lòng nhập';
 
 ///DIALOG
 const String dialogCancelButton = 'Hủy';

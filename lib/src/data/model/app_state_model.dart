@@ -3,18 +3,21 @@
 // found in the LICENSE file.
 
 
-import 'package:dong_phuc_296_web/src/data/model/product.dart';
+import 'package:dong_phuc_296_web/src/data/model/order_model.dart';
+import 'package:dong_phuc_296_web/src/data/model/product_model.dart';
+import 'package:dong_phuc_296_web/src/data/repository/orders_repository.dart';
 import 'package:dong_phuc_296_web/src/data/repository/products_repository.dart';
 import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../util/constants.dart';
-import '../../util/product_query_enum.dart';
+import '../../util/query_enum.dart';
 import 'category_model.dart';
 
 class AppStateModel extends Model {
   // All the available products.
-  List<Product> _availableProducts = [];
+  List<ProductModel> _availableProducts = [];
+  List<OrderModel> _availableOrders = [];
 
   // The currently selected category of products.
   CategoryModel _selectedCategory = categoryAll;
@@ -50,9 +53,9 @@ class AppStateModel extends Model {
   double get totalCost => subtotalCost + shippingCost + tax;
 
   // Returns a copy of the list of available products, filtered by category.
-  List<Product> getProducts() {
+  List<ProductModel> getProducts() {
     if (_selectedCategory == categoryAll) {
-      return List<Product>.from(_availableProducts);
+      return List<ProductModel>.from(_availableProducts);
     } else {
       return _availableProducts
           .where((p) => p.catId == _selectedCategory.catId)
@@ -98,7 +101,7 @@ class AppStateModel extends Model {
   }
 
   // Returns the Product instance matching the provided id.
-  Product getProductById(int id) {
+  ProductModel getProductById(int id) {
     return _availableProducts.firstWhere((p) => p.productId == id);
   }
 
@@ -111,6 +114,11 @@ class AppStateModel extends Model {
   // Loads the list of available products from the repo.
   Future<void> loadProducts() async {
     _availableProducts = await ProductsRepository().getListProducts(categoryAll.catId, ProductQueryEnum.dateCreatedDesc);
+    notifyListeners();
+  }
+
+  Future<void> loadListOrders() async {
+    _availableOrders = await OrdersRepository().getListOrders(OrderQueryEnum.dateCreatedDesc);
     notifyListeners();
   }
 

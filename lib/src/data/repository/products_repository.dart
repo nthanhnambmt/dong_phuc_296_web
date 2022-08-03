@@ -3,15 +3,16 @@
 // found in the LICENSE file.
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dong_phuc_296_web/src/data/model/product.dart';
+import 'package:dong_phuc_296_web/src/data/model/product_model.dart';
 import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
 
-import '../../util/product_query_enum.dart';
+import '../../util/constants.dart';
+import '../../util/query_enum.dart';
 import '../model/category_model.dart';
 
 class ProductsRepository {
   static final ProductsRepository _instance = ProductsRepository._internal();
-  List<Product> lstProducts = [];
+  List<ProductModel> lstProducts = [];
 
   factory ProductsRepository() {
     return _instance;
@@ -21,15 +22,19 @@ class ProductsRepository {
     // initialization logic
   }
 
-  Future<List<Product>> getListProducts(
+  Future<List<ProductModel>> getListProducts(
       int categoryId, ProductQueryEnum queryEnum) async {
     if (lstProducts.isEmpty) {
       final data = await FirebaseFirestore.instance
-          .collection('product')
+          .collection(productDocument)
           .queryBy(queryEnum, '')
-          .get();
-      lstProducts =
-          List.from(data.docs.map((item) => Product.fromSnapshot(item)));
+          .get()
+          .then((value) => {
+                lstProducts = List.from(
+                    value.docs.map((item) => ProductModel.fromSnapshot(item)))
+              });
+      // lstProducts =
+      //     List.from(data.docs.map((item) => ProductModel.fromSnapshot(item)));
       lstProducts.forEach((element) {
         print('------------------------CommonLog: element ${element.toJson()}');
       });
@@ -42,24 +47,24 @@ class ProductsRepository {
     }
   }
 
-  Future<Product> getProductDetail(int? productId) async {
+  Future<ProductModel> getProductDetail(int? productId) async {
     return await FirebaseFirestore.instance
-        .collection('product')
+        .collection(productDocument)
         .doc(productId.valueOrZeroInt.toString())
         .get()
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
-        return Product.fromSnapshot(documentSnapshot);
+        return ProductModel.fromSnapshot(documentSnapshot);
       } else {
-        return Product();
+        return ProductModel();
       }
-    }).catchError((error) => Product());
+    }).catchError((error) => ProductModel());
   }
 
   ///Document ID là auto-ID của firebase
-  Future<void> addNewProduct(Product newProduct) {
+  Future<void> addNewProduct(ProductModel newProduct) {
     return FirebaseFirestore.instance
-        .collection('product')
+        .collection(productDocument)
         .add({
           'catId': newProduct.catId,
           'catName': newProduct.catName,
@@ -69,14 +74,14 @@ class ProductsRepository {
           'assetAspectRatio': newProduct.assetAspectRatio,
           'dateCreated': newProduct.dateCreated,
         })
-        .then((value) => print("Product ${newProduct.productName} Added"))
-        .catchError((error) => print("Failed to add Product: $error"));
+        .then((value) => print("------------------------CommonLog: Product ${newProduct.productName} Added"))
+        .catchError((error) => print("------------------------CommonLog: Failed to add Product: $error"));
   }
 
   ///Set được Document ID
-  Future<void> setNewProduct(Product newProduct) {
+  Future<void> setNewProduct(ProductModel newProduct) {
     return FirebaseFirestore.instance
-        .collection('product')
+        .collection(productDocument)
         .doc(newProduct.productId.toString())
         .set({
           'catId': newProduct.catId,
@@ -87,13 +92,13 @@ class ProductsRepository {
           'assetAspectRatio': newProduct.assetAspectRatio,
           'dateCreated': newProduct.dateCreated,
         })
-        .then((value) => print("Product ${newProduct.productName} Added"))
-        .catchError((error) => print("Failed to add Product: $error"));
+        .then((value) => print("------------------------CommonLog: Product ${newProduct.productName} set"))
+        .catchError((error) => print("------------------------CommonLog: Failed to set Product: $error"));
   }
 
-  Future<void> updateProduct(Product newProduct) {
+  Future<void> updateProduct(ProductModel newProduct) {
     return FirebaseFirestore.instance
-        .collection('product')
+        .collection(productDocument)
         .doc(newProduct.productId.toString())
         .update({
           'catId': newProduct.catId,
@@ -103,13 +108,13 @@ class ProductsRepository {
           'productPrice': newProduct.productPrice,
           'assetAspectRatio': newProduct.assetAspectRatio,
         })
-        .then((value) => print("Product ${newProduct.productName} Added"))
-        .catchError((error) => print("Failed to add Product: $error"));
+        .then((value) => print("Product ${newProduct.productName} updated"))
+        .catchError((error) => print("Failed to update Product: $error"));
   }
 
-  Future<void> deleteProduct(Product product) {
+  Future<void> deleteProduct(ProductModel product) {
     return FirebaseFirestore.instance
-        .collection('product')
+        .collection(productDocument)
         .doc(product.productId.toString())
         .delete()
         .then((value) => print("Product ${product.productName} deleted"))

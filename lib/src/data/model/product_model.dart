@@ -5,10 +5,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'product.g.dart';
+import 'converter/TimeStampConverter.dart';
+
+part 'product_model.g.dart';
 
 @JsonSerializable()
-class Product {
+class ProductModel {
   // final CategoryModel category;
   @JsonKey(name: 'catId', defaultValue: 1)
   int? catId;
@@ -23,11 +25,12 @@ class Product {
   @JsonKey(name: 'productPrice', defaultValue: 0)
   int? productPrice;
   @JsonKey(name: 'dateCreated')
-  Timestamp? dateCreated;
+  @TimeStampConverter()
+  DateTime? dateCreated;
   @JsonKey(name: 'isShow', defaultValue: true)
   bool? isShow;
 
-  Product({
+  ProductModel({
     this.catId,
     this.catName,
     this.productId,
@@ -38,24 +41,24 @@ class Product {
     this.isShow,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) =>
-      _$ProductFromJson(json);
+  factory ProductModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ProductToJson(this);
+  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 
   int getProductSubTotal(int? quantity) {
     int _quantity = quantity != null ? quantity : 0;
     return this.productPrice != null ? this.productPrice! * _quantity : 0;
   }
 
-  Product.fromSnapshot(snapshot)
+  ProductModel.fromSnapshot(snapshot)
       : catId = snapshot.data()['catId'],
         catName = snapshot.data()['catName'],
         productId = snapshot.data()['productId'],
         productName = snapshot.data()['productName'],
         productPrice = snapshot.data()['productPrice'],
         assetAspectRatio = snapshot.data()['assetAspectRatio'],
-        dateCreated = snapshot.data()['dateCreated'];
+        dateCreated = const TimeStampConverter().fromJson(snapshot.data()['dateCreated']);
 
   String get getImageName => '$productId.jpg';
 
@@ -64,5 +67,4 @@ class Product {
   String get getImage2x => 'product_images/2x';
 
   String get getImage3x => 'product_images/3x';
-
 }

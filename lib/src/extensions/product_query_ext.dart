@@ -1,8 +1,8 @@
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
 //
-// import '../data/model/product.dart';
-// import '../util/product_query_enum.dart';
+// import '../data/model/product_model.dart';
+// import '../util/query_enum.dart';
 //
 // extension on CollectionReference<Product> {
 //   /// Create a firebase query from a [ProductQueryEnum]
