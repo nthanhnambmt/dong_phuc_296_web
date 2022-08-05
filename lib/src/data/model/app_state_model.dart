@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'package:dong_phuc_296_web/src/data/model/order_model.dart';
 import 'package:dong_phuc_296_web/src/data/model/product_model.dart';
 import 'package:dong_phuc_296_web/src/data/repository/orders_repository.dart';
@@ -24,6 +23,7 @@ class AppStateModel extends Model {
 
   // The IDs and quantities of products currently in the cart.
   final Map<int, int> _productsInCart = <int, int>{};
+  final List<ProductModel> lstProductInCart = [];
 
   Map<int, int> get productsInCart => Map<int, int>.from(_productsInCart);
 
@@ -35,7 +35,9 @@ class AppStateModel extends Model {
   // Totaled prices of the items in the cart.
   double get subtotalCost {
     return _productsInCart.keys
-        .map((id) => _availableProducts[id].productPrice.valueOrZeroInt * _productsInCart[id]!)
+        .map((id) =>
+            _availableProducts[id].productPrice.valueOrZeroInt *
+            _productsInCart[id]!)
         .fold(0.0, (sum, e) => sum + e);
   }
 
@@ -64,11 +66,21 @@ class AppStateModel extends Model {
   }
 
   // Adds a product to the cart.
-  void addProductToCart(int productId) {
+  void addProductToCart(ProductModel productModel) {
+    int productId = productModel.productId.valueOrZeroInt;
     if (!_productsInCart.containsKey(productId)) {
       _productsInCart[productId] = 1;
+
+      ///Update lstProductInCart
+      lstProductInCart.add(productModel..quantity = 1);
     } else {
       _productsInCart[productId] = _productsInCart[productId]! + 1;
+
+      ///Update lstProductInCart
+      var productNeedUpdate =
+          lstProductInCart.firstWhere((p) => p.productId == productId);
+      productNeedUpdate
+        ..quantity = productNeedUpdate.quantity.valueOrZeroInt + 1;
     }
 
     notifyListeners();
@@ -80,8 +92,17 @@ class AppStateModel extends Model {
     assert(quantity > 0);
     if (!_productsInCart.containsKey(productId)) {
       _productsInCart[productId] = quantity;
+
+      ///Update lstProductInCart
+      lstProductInCart.add(getProductById(productId)..quantity = quantity);
     } else {
       _productsInCart[productId] = _productsInCart[productId]! + quantity;
+
+      ///Update lstProductInCart
+      var productNeedUpdate =
+          lstProductInCart.firstWhere((p) => p.productId == productId);
+      productNeedUpdate
+        ..quantity = productNeedUpdate.quantity.valueOrZeroInt + quantity;
     }
 
     notifyListeners();
@@ -92,8 +113,18 @@ class AppStateModel extends Model {
     if (_productsInCart.containsKey(productId)) {
       if (_productsInCart[productId] == 1) {
         _productsInCart.remove(productId);
+
+        ///Update lstProductInCart
+        lstProductInCart
+            .removeWhere((element) => element.productId == productId);
       } else {
         _productsInCart[productId] = _productsInCart[productId]! - 1;
+
+        ///Update lstProductInCart
+        var productNeedUpdate =
+            lstProductInCart.firstWhere((p) => p.productId == productId);
+        productNeedUpdate
+          ..quantity = productNeedUpdate.quantity.valueOrZeroInt - 1;
       }
     }
 
@@ -105,20 +136,28 @@ class AppStateModel extends Model {
     return _availableProducts.firstWhere((p) => p.productId == id);
   }
 
+  // Get all product in cart.
+  List<ProductModel> getProductInCart() {
+    return lstProductInCart;
+  }
+
   // Removes everything from the cart.
   void clearCart() {
     _productsInCart.clear();
+    lstProductInCart.clear();
     notifyListeners();
   }
 
   // Loads the list of available products from the repo.
   Future<void> loadProducts() async {
-    _availableProducts = await ProductsRepository().getListProducts(categoryAll.catId, ProductQueryEnum.dateCreatedDesc);
+    _availableProducts = await ProductsRepository()
+        .getListProducts(categoryAll.catId, ProductQueryEnum.dateCreatedDesc);
     notifyListeners();
   }
 
   Future<void> loadListOrders() async {
-    _availableOrders = await OrdersRepository().getListOrders(OrderQueryEnum.dateCreatedDesc);
+    _availableOrders =
+        await OrdersRepository().getListOrders(OrderQueryEnum.dateCreatedDesc);
     notifyListeners();
   }
 

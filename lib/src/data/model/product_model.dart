@@ -29,6 +29,8 @@ class ProductModel {
   DateTime? dateCreated;
   @JsonKey(name: 'isShow', defaultValue: true)
   bool? isShow;
+  @JsonKey(name: 'quantity', defaultValue: 0)
+  int? quantity;
 
   ProductModel({
     this.catId,
@@ -39,6 +41,7 @@ class ProductModel {
     this.assetAspectRatio,
     this.dateCreated,
     this.isShow,
+    this.quantity,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
@@ -58,7 +61,23 @@ class ProductModel {
         productName = snapshot.data()['productName'],
         productPrice = snapshot.data()['productPrice'],
         assetAspectRatio = snapshot.data()['assetAspectRatio'],
-        dateCreated = const TimeStampConverter().fromJson(snapshot.data()['dateCreated']);
+        dateCreated =
+            const TimeStampConverter().fromJson(snapshot.data()['dateCreated']);
+
+  ProductModel.fromSnapshotForOrder(Map<String, dynamic> map)
+      : productId = map['productId'],
+        productName = map['productName'],
+        productPrice = map['productPrice'],
+        quantity = map['quantity'];
+
+  Map<String, dynamic> toMapForSnapshot() {
+    return {
+      'productId': productId,
+      'productName': productName,
+      'productPrice': productPrice,
+      'quantity': quantity,
+    };
+  }
 
   String get getImageName => '$productId.jpg';
 

@@ -13,8 +13,10 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       productName: json['productName'] as String? ?? 'Không tên',
       productPrice: json['productPrice'] as int? ?? 0,
       assetAspectRatio: (json['assetAspectRatio'] as num?)?.toDouble() ?? 1.0,
-      dateCreated: DateTime.parse(json['dateCreated'] as String),
+      dateCreated: const TimeStampConverter()
+          .fromJson(json['dateCreated'] as Timestamp?),
       isShow: json['isShow'] as bool? ?? true,
+      quantity: json['quantity'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
@@ -27,4 +29,5 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'productPrice': instance.productPrice,
       'dateCreated': const TimeStampConverter().toJson(instance.dateCreated),
       'isShow': instance.isShow,
+      'quantity': instance.quantity,
     };

@@ -50,7 +50,7 @@ class _CartWidgetState extends State<CartWidget> {
               model.removeItemFromCart(id);
             },
             onAddCartItemPressed: () {
-              model.addProductToCart(id);
+              model.addProductToCart(model.getProductById(id));
             },
             startColumnWidth: _startColumnWidth,
           ),
@@ -251,8 +251,8 @@ class _CartWidgetState extends State<CartWidget> {
               //         '------------------------CommonLog: Document data: ${doc.data()}');
               //   });
               // });
-              print(
-                  '------------------------CommonLog: formKey.currentState!.validate(): ${formKey.currentState!.validate()}');
+              await OrdersRepository()
+                  .getListOrders(OrderQueryEnum.dateCreatedDesc);
 
               if (formKey.currentState!.validate()) {
                 // Navigator.of(context).push(
@@ -260,15 +260,16 @@ class _CartWidgetState extends State<CartWidget> {
                 //     builder: (_) => SuccessPage(),
                 //   ),
                 // );
+
                 await OrdersRepository().setNewOrder(OrderModel(
-                  orderId: DateTime.now().millisecondsSinceEpoch,
-                  receiverName: receiverNameController.text,
-                  receiverPhone: receiverPhoneController.text,
-                  receiverAddress: receiverAddressController.text,
-                  status:  StatusModel(statusId: 1, statusName: ''),
-                  dateCreated: DateTime.now(),
-                  isDeleted: false,
-                ));
+                    orderId: DateTime.now().millisecondsSinceEpoch,
+                    receiverName: receiverNameController.text,
+                    receiverPhone: receiverPhoneController.text,
+                    receiverAddress: receiverAddressController.text,
+                    status: StatusModel(statusId: 1, statusName: ''),
+                    dateCreated: DateTime.now(),
+                    isDeleted: false,
+                    lstProducts: model.getProductInCart()));
               }
             },
             child: Padding(

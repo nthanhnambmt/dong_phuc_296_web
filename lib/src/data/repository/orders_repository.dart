@@ -88,9 +88,11 @@ class OrdersRepository {
           'receiverName': newOrder.receiverName,
           'receiverPhone': newOrder.receiverPhone,
           'receiverAddress': newOrder.receiverAddress,
-          'dateCreated': Timestamp.fromMicrosecondsSinceEpoch(newOrder.dateCreated!.microsecondsSinceEpoch.valueOrZeroInt),
+          'dateCreated': Timestamp.fromMicrosecondsSinceEpoch(
+              newOrder.dateCreated!.microsecondsSinceEpoch.valueOrZeroInt),
           'isDeleted': newOrder.isDeleted,
           'statusId': newOrder.status?.statusId.valueOrZeroInt,
+          'lstProducts': newOrder.toMapForSnapshot()['lstProducts'],
         })
         .then((value) => print(
             "------------------------CommonLog: Order ${newOrder.orderId} set"))
@@ -112,9 +114,9 @@ class OrdersRepository {
           'statusId': newOrder.status?.statusId.valueOrZeroInt,
         })
         .then((value) => print(
-        "------------------------CommonLog: Order ${newOrder.orderId} updated"))
+            "------------------------CommonLog: Order ${newOrder.orderId} updated"))
         .catchError((error) => print(
-        "------------------------CommonLog: Failed to updateOrder: $error"));
+            "------------------------CommonLog: Failed to updateOrder: $error"));
   }
 
   Future<void> deleteOrder(OrderModel orderModel) {
@@ -123,9 +125,9 @@ class OrdersRepository {
         .doc(orderModel.orderId.toString())
         .delete()
         .then((value) => print(
-        "------------------------CommonLog: Order ${orderModel.orderId} deleted"))
+            "------------------------CommonLog: Order ${orderModel.orderId} deleted"))
         .catchError((error) => print(
-        "------------------------CommonLog: Failed to deleteOrder: $error"));
+            "------------------------CommonLog: Failed to deleteOrder: $error"));
   }
 }
 

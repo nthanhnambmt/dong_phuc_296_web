@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dong_phuc_296_web/src/data/model/product_model.dart';
 import 'package:dong_phuc_296_web/src/data/model/status_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -23,6 +24,8 @@ class OrderModel {
   bool? isDeleted;
   @JsonKey(name: 'status')
   StatusModel? status;
+  @JsonKey(name: 'lstProducts')
+  List<ProductModel>? lstProducts;
 
   OrderModel({
     this.orderId,
@@ -32,6 +35,7 @@ class OrderModel {
     this.dateCreated,
     this.isDeleted,
     this.status,
+    this.lstProducts,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) =>
@@ -48,5 +52,17 @@ class OrderModel {
             const TimeStampConverter().fromJson(snapshot.data()['dateCreated']),
         isDeleted = snapshot.data()['isDeleted'],
         status = StatusModel(
-            statusId: snapshot.data()['status'], statusName: 'Đơn hàng mới');
+            statusId: snapshot.data()['status'], statusName: 'Đơn hàng mới'),
+        lstProducts = List<ProductModel>.from(
+            snapshot.data()['lstProducts'] != null
+                ? snapshot
+                    .data()['lstProducts']
+                    .map((x) => ProductModel.fromSnapshotForOrder(x))
+                : []);
+
+  Map<String, dynamic> toMapForSnapshot() {
+    return {
+      'lstProducts': lstProducts?.map((x) => x.toMapForSnapshot()).toList(),
+    };
+  }
 }

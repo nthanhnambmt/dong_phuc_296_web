@@ -7,7 +7,7 @@ part of 'order_model.dart';
 // **************************************************************************
 
 OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
-      orderId: json['orderId'] as int? ?? 0,
+      orderId: json['orderId'] as int?,
       receiverName: json['receiverName'] as String? ?? '',
       receiverPhone: json['receiverPhone'] as String? ?? '',
       receiverAddress: json['receiverAddress'] as String? ?? '',
@@ -17,6 +17,9 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
       status: json['status'] == null
           ? null
           : StatusModel.fromJson(json['status'] as Map<String, dynamic>),
+      lstProducts: (json['lstProducts'] as List<dynamic>?)
+          ?.map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
@@ -28,4 +31,5 @@ Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
       'dateCreated': const TimeStampConverter().toJson(instance.dateCreated),
       'isDeleted': instance.isDeleted,
       'status': instance.status,
+      'lstProducts': instance.lstProducts,
     };

@@ -99,7 +99,7 @@ Widget _buildProductCard({
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
-              model.addProductToCart(product.productId.valueOrZeroInt);
+              model.addProductToCart(product);
             },
             child: child,
           ),
