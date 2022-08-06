@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dong_phuc_296_web/src/data/model/product_model.dart';
-import 'package:dong_phuc_296_web/src/data/model/status_model.dart';
+import 'package:dongphuc296web/src/data/model/product_model.dart';
+import 'package:dongphuc296web/src/data/model/status_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'converter/TimeStampConverter.dart';

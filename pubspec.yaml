@@ -1,4 +1,4 @@
-name: dong_phuc_296_web
+name: dongphuc296web
 description: Dong phuc 296 web
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
@@ -28,7 +28,8 @@ dependencies:
   json_serializable: ^6.3.1
   google_fonts: ^2.3.2
   firebase_core: ^1.20.0
-  cloud_firestore: ^3.4.3
+  cloud_firestore: ^3.4.2
+  cloud_firestore_web: ^2.8.3
 
 dev_dependencies:
   flutter_lints: ^2.0.1

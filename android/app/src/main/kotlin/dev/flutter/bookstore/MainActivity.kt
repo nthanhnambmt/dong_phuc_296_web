@@ -1,4 +1,4 @@
-package dev.flutter.dong_phuc_296_web
+package dev.flutter.dongphuc296web
 
 import io.flutter.embedding.android.FlutterActivity
 

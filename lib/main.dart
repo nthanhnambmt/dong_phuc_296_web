@@ -4,7 +4,7 @@
 
 import 'dart:io';
 
-import 'package:dong_phuc_296_web/src/app.dart'
+import 'package:dongphuc296web/src/app.dart'
     deferred as web296;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -16,6 +16,7 @@ import 'package:window_size/window_size.dart';import 'package:cloud_firestore/cl
 import 'firebase_options.dart';
 import 'src/widgets/deferred_widget.dart';
 
+
 Future<void> main() async {
   // Use package:url_strategy until this pull request is released:
   // https://github.com/flutter/flutter/pull/77103
@@ -25,7 +26,7 @@ Future<void> main() async {
   // server to redirect all paths to index.html.
   //
   // On mobile platforms, both functions are no-ops.
-  setHashUrlStrategy();
+  // setHashUrlStrategy();
   // setPathUrlStrategy();
 
   await Firebase.initializeApp(
@@ -39,7 +40,7 @@ Future<void> main() async {
           //         () => web296.ShrineApp())
           MaterialApp(
         home: DeferredWidget(web296.loadLibrary,
-            () => web296.ShrineApp()), // ignore: prefer_const_constructors
+            () => web296.Web296App()), // ignore: prefer_const_constructors
       )));
 }
 

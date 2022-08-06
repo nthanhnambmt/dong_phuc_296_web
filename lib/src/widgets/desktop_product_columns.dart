@@ -4,7 +4,7 @@
 
 import 'dart:math';
 
-import 'package:dong_phuc_296_web/src/widgets/product_card.dart';
+import 'package:dongphuc296web/src/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 import '../data/model/product_model.dart';

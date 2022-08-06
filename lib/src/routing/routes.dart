@@ -7,3 +7,5 @@ const String homeRoute = 'web296';
 const String introduceRoute = 'web296/intro';
 const String chooseSizeRoute = 'web296/chooseSize';
 const String contactUsRoute = 'web296/contactUs';
+const String createProduct = '/web296/createProduct';
+const String orders = 'web296/orders';

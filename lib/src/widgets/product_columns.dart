@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:dong_phuc_296_web/src/widgets/product_card.dart';
+import 'package:dongphuc296web/src/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 import '../data/model/product_model.dart';

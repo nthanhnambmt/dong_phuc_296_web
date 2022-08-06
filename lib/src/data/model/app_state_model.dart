@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:dong_phuc_296_web/src/data/model/order_model.dart';
-import 'package:dong_phuc_296_web/src/data/model/product_model.dart';
-import 'package:dong_phuc_296_web/src/data/repository/orders_repository.dart';
-import 'package:dong_phuc_296_web/src/data/repository/products_repository.dart';
-import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
+import 'package:dongphuc296web/src/data/model/order_model.dart';
+import 'package:dongphuc296web/src/data/model/product_model.dart';
+import 'package:dongphuc296web/src/data/repository/orders_repository.dart';
+import 'package:dongphuc296web/src/data/repository/products_repository.dart';
+import 'package:dongphuc296web/src/extensions/extensions.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../util/constants.dart';
@@ -36,7 +36,10 @@ class AppStateModel extends Model {
   double get subtotalCost {
     return _productsInCart.keys
         .map((id) =>
-            _availableProducts[id].productPrice.valueOrZeroInt *
+            lstProductInCart
+                .firstWhere((element) => element.productId == id)
+                .productPrice
+                .valueOrZeroInt *
             _productsInCart[id]!)
         .fold(0.0, (sum, e) => sum + e);
   }
@@ -82,7 +85,20 @@ class AppStateModel extends Model {
       productNeedUpdate
         ..quantity = productNeedUpdate.quantity.valueOrZeroInt + 1;
     }
+    lstProductInCart.forEach((element) {
+      print(
+          '---------------->>>>>>>>>>>>>>>>>>>>>>lstProductInCart    ${element.toJson()}');
+    });
+    _productsInCart.forEach((key, value) {
+      print(
+          '---------------->>>>>>>>>>>>>>>>>>>>>>_productsInCart $key --    $value');
+    });
 
+    _availableProducts.forEach((element) {
+      print(
+          '---------------->>>>>>>>>>>>>>>>>>>>>>_availableProducts    ${element.toJson()}');
+    });
+    print('---------------->>>>>>>>>>>>>>>>>>>>>>totalCost $totalCost');
     notifyListeners();
   }
 

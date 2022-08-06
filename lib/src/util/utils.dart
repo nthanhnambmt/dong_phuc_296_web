@@ -4,8 +4,8 @@ import 'dart:js';
 import 'dart:math';
 import 'dart:ui' as ui;
 
-import 'package:dong_phuc_296_web/src/data/model/order_model.dart';
-import 'package:dong_phuc_296_web/src/util/strings.dart';
+import 'package:dongphuc296web/src/data/model/order_model.dart';
+import 'package:dongphuc296web/src/util/strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -70,10 +70,9 @@ class Utils {
                 content,
                 style: dialogTextStyle,
               ),
-              // actions: [
-              //   DialogButtonWidget(text: dialogCancelButton),
-              //
-              // ],
+              actions: [
+                DialogButtonWidget(text: dialogCloseButton),
+              ],
             ));
   }
 

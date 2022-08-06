@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.flutter.dong_phuc_296_web">
+    package="dev.flutter.dongphuc296web">
    <application
-        android:label="dong_phuc_296_web"
+        android:label="dongphuc296web"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

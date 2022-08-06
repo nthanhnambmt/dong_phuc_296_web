@@ -4,8 +4,8 @@
 
 import 'dart:math';
 
-import 'package:dong_phuc_296_web/src/widgets/theme.dart';
-import 'package:dong_phuc_296_web/src/widgets/web_296_logo_widget.dart';
+import 'package:dongphuc296web/src/widgets/theme.dart';
+import 'package:dongphuc296web/src/widgets/web_296_logo_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../data/gallery_options.dart';
@@ -170,7 +170,7 @@ class _CancelAndNextButtons extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              Navigator.of(context).restorablePushNamed(ShrineApp.homeRoute);
+              Navigator.of(context).restorablePushNamed(Web296App.homeRoute);
             },
             child: Padding(
               padding: buttonTextPadding,

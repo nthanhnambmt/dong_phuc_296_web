@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:dong_phuc_296_web/src/data/model/order_model.dart';
-import 'package:dong_phuc_296_web/src/data/model/status_model.dart';
-import 'package:dong_phuc_296_web/src/util/constants.dart';
-import 'package:dong_phuc_296_web/src/widgets/theme.dart';
-import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
+import 'package:dongphuc296web/src/data/model/order_model.dart';
+import 'package:dongphuc296web/src/data/model/status_model.dart';
+import 'package:dongphuc296web/src/util/constants.dart';
+import 'package:dongphuc296web/src/widgets/theme.dart';
+import 'package:dongphuc296web/src/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
@@ -224,52 +224,23 @@ class _CartWidgetState extends State<CartWidget> {
               primary: web296Pink100,
             ),
             onPressed: () async {
-              //TODO: Check data truoc khi gui, thong bao khi thanh cong
-              // Utils.sendFCM(
-              //   context,
-              //   [fcm_token_nokia_2_3],
-              //   OrderModel(
-              //       receiverNameController.text,
-              //       receiverPhoneController.text,
-              //       receiverAddressController.text),
-              //   () => {
-              //     Utils.showTwoButtonDialog(context, cartClearQuestion, () {
-              //       setState(() {
-              //         Utils.showAlertDialog(context, orderSuccess);
-              //         model.clearCart();
-              //         expandingBottomSheet!.close();
-              //       });
-              //     })
-              //   },
-              // );
-
-              ///Test cloud firestore
-              // final ref = FirebaseFirestore.instance.collection(orderDocument);
-              // ref.get().then((QuerySnapshot querySnapshot) {
-              //   querySnapshot.docs.forEach((doc) {
-              //     print(
-              //         '------------------------CommonLog: Document data: ${doc.data()}');
-              //   });
-              // });
-              await OrdersRepository()
-                  .getListOrders(OrderQueryEnum.dateCreatedDesc);
-
               if (formKey.currentState!.validate()) {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (_) => SuccessPage(),
-                //   ),
-                // );
+                await OrdersRepository().setNewOrder(
+                    context,
+                    OrderModel(
+                        orderId: DateTime.now().millisecondsSinceEpoch,
+                        receiverName: receiverNameController.text,
+                        receiverPhone: receiverPhoneController.text,
+                        receiverAddress: receiverAddressController.text,
+                        status: StatusModel(statusId: 1, statusName: ''),
+                        dateCreated: DateTime.now(),
+                        isDeleted: false,
+                        lstProducts: model.getProductInCart()));
 
-                await OrdersRepository().setNewOrder(OrderModel(
-                    orderId: DateTime.now().millisecondsSinceEpoch,
-                    receiverName: receiverNameController.text,
-                    receiverPhone: receiverPhoneController.text,
-                    receiverAddress: receiverAddressController.text,
-                    status: StatusModel(statusId: 1, statusName: ''),
-                    dateCreated: DateTime.now(),
-                    isDeleted: false,
-                    lstProducts: model.getProductInCart()));
+                setState(() {
+                  model.clearCart();
+                  expandingBottomSheet!.close();
+                });
               }
             },
             child: Padding(

@@ -4,8 +4,8 @@
 
 import 'dart:math';
 
-import 'package:dong_phuc_296_web/src/widgets/product_card.dart';
-import 'package:dong_phuc_296_web/src/widgets/product_columns.dart';
+import 'package:dongphuc296web/src/widgets/product_card.dart';
+import 'package:dongphuc296web/src/widgets/product_columns.dart';
 import 'package:flutter/material.dart';
 
 

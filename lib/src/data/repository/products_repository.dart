@@ -3,11 +3,13 @@
 // found in the LICENSE file.
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dong_phuc_296_web/src/data/model/product_model.dart';
-import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
+import 'package:dongphuc296web/src/data/model/product_model.dart';
+import 'package:dongphuc296web/src/extensions/extensions.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../util/constants.dart';
 import '../../util/query_enum.dart';
+import '../../util/utils.dart';
 import '../model/category_model.dart';
 
 class ProductsRepository {
@@ -74,12 +76,14 @@ class ProductsRepository {
           'assetAspectRatio': newProduct.assetAspectRatio,
           'dateCreated': newProduct.dateCreated,
         })
-        .then((value) => print("------------------------CommonLog: Product ${newProduct.productName} Added"))
-        .catchError((error) => print("------------------------CommonLog: Failed to add Product: $error"));
+        .then((value) => print(
+            "------------------------CommonLog: Product ${newProduct.productName} Added"))
+        .catchError((error) => print(
+            "------------------------CommonLog: Failed to add Product: $error"));
   }
 
   ///Set được Document ID
-  Future<void> setNewProduct(ProductModel newProduct) {
+  Future<void> setNewProduct(BuildContext context, ProductModel newProduct) {
     return FirebaseFirestore.instance
         .collection(productDocument)
         .doc(newProduct.productId.toString())
@@ -90,10 +94,13 @@ class ProductsRepository {
           'productName': newProduct.productName,
           'productPrice': newProduct.productPrice,
           'assetAspectRatio': newProduct.assetAspectRatio,
-          'dateCreated': newProduct.dateCreated,
+          'dateCreated': Timestamp.fromMicrosecondsSinceEpoch(
+              newProduct.dateCreated!.microsecondsSinceEpoch.valueOrZeroInt),
         })
-        .then((value) => print("------------------------CommonLog: Product ${newProduct.productName} set"))
-        .catchError((error) => print("------------------------CommonLog: Failed to set Product: $error"));
+        .then((value) => Utils.showAlertDialog(
+            context, 'Add product ${newProduct.productName} success'))
+        .catchError((error) =>
+            Utils.showAlertDialog(context, 'Failed to set Product: $error'));
   }
 
   Future<void> updateProduct(ProductModel newProduct) {

@@ -1,4 +1,4 @@
-import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
+import 'package:dongphuc296web/src/extensions/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

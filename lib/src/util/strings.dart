@@ -186,6 +186,7 @@ const String web296TooltipAddItem = 'Thêm';
 const String enterValidText = 'Vui lòng nhập';
 
 ///DIALOG
+const String dialogCloseButton = 'Đóng';
 const String dialogCancelButton = 'Hủy';
 const String dialogClearButton = 'Xóa';
 const String cartClearQuestion = 'Bạn muốn xóa giỏ hàng?';
@@ -221,3 +222,12 @@ const String orderSuccess = 'Đặt hàng thành công';
 const String fcm_server_key = 'AAAA8tTT38Y:APA91bG_GteQU6rh8yk8jMbVsEzGDCf31K-n31VYphGr3MIjVCQ_k2c90Kc4Hcguvg6oo0hDHCFqcv1rfgt-F2f-tGp4p06TsKMFMjrqz0gg7J4sXG1VgSF9v3wVbCNv-eEgNYzlnlDk';
 const String fcm_token_nokia_2_3 = 'fADYmiZ-QRaBCNVsbpsapt:APA91bFdS10tqEPGSDJOIW-ZhzML54yFfMHdk00fAveAmfsZ8Sm8Z6gLbAIhguOzV9YDxm1Fb6b1pRNUfKE0wx5EydNlqQN-26QXh07Thdd889daTMxLYGW223ds7B6wOoj_9nVC_dp9';
 
+///Admin create product
+const String strCreateProduct = 'Thêm sản phẩm';
+const String createProductButton = 'Thêm';
+const String strProductId = 'Mã sản phẩm';
+const String strProductName = 'Tên sản phẩm';
+const String strProductPrice = 'Giá sản phẩm';
+const String strProductAspectRatio = 'Tỉ lệ hình rộng/cao';
+const String strProductCategoryId = 'Category ID';
+const String strProductCategoryName = 'Category name';

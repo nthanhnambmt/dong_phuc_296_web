@@ -1,4 +1,4 @@
-import 'package:dong_phuc_296_web/src/util/strings.dart';
+import 'package:dongphuc296web/src/util/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 

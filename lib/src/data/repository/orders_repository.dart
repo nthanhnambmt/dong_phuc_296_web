@@ -3,12 +3,14 @@
 // found in the LICENSE file.
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dong_phuc_296_web/src/data/model/order_model.dart';
-import 'package:dong_phuc_296_web/src/data/model/product_model.dart';
-import 'package:dong_phuc_296_web/src/extensions/extensions.dart';
+import 'package:dongphuc296web/src/data/model/order_model.dart';
+import 'package:dongphuc296web/src/data/model/product_model.dart';
+import 'package:dongphuc296web/src/extensions/extensions.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../util/constants.dart';
 import '../../util/query_enum.dart';
+import '../../util/utils.dart';
 import '../model/category_model.dart';
 
 class OrdersRepository {
@@ -23,6 +25,8 @@ class OrdersRepository {
     // initialization logic
   }
 
+  ///Get list order
+  ///await OrdersRepository().getListOrders(OrderQueryEnum.dateCreatedDesc);
   Future<List<OrderModel>> getListOrders(OrderQueryEnum queryEnum) async {
     try {
       await FirebaseFirestore.instance
@@ -79,7 +83,7 @@ class OrdersRepository {
   }
 
   ///Set được Document ID
-  Future<void> setNewOrder(OrderModel newOrder) {
+  Future<void> setNewOrder(BuildContext context, OrderModel newOrder) {
     return FirebaseFirestore.instance
         .collection(orderDocument)
         .doc(newOrder.orderId.toString())
@@ -94,10 +98,10 @@ class OrdersRepository {
           'statusId': newOrder.status?.statusId.valueOrZeroInt,
           'lstProducts': newOrder.toMapForSnapshot()['lstProducts'],
         })
-        .then((value) => print(
-            "------------------------CommonLog: Order ${newOrder.orderId} set"))
-        .catchError((error) => print(
-            "------------------------CommonLog: Failed to setNewOrder: $error"));
+        .then((value) =>
+            Utils.showAlertDialog(context, 'Tạo đơn hàng thành công'))
+        .catchError(
+            (error) => Utils.showAlertDialog(context, 'Lỗi tạo đơn hàng'));
   }
 
   Future<void> updateOrder(OrderModel newOrder) {

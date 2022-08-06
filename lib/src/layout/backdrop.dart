@@ -4,7 +4,7 @@
 
 import 'dart:math';
 
-import 'package:dong_phuc_296_web/src/widgets/page_status.dart';
+import 'package:dongphuc296web/src/widgets/page_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

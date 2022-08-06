@@ -17,4 +17,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DONGPHUC296WEB }}'
           channelId: live
-          projectId: dong_phuc_296_web
+          projectId: dongphuc296web

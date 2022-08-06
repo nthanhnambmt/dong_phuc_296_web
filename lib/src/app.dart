@@ -2,14 +2,16 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:dong_phuc_296_web/src/screen/contact_us_screen.dart';
-import 'package:dong_phuc_296_web/src/screen/intro_screen.dart';
-import 'package:dong_phuc_296_web/src/screen/product_screen.dart';
-import 'package:dong_phuc_296_web/src/widgets/page_status.dart';
-import 'package:dong_phuc_296_web/src/widgets/scrim.dart';
-import 'package:dong_phuc_296_web/src/widgets/layout_cache.dart';
-import 'package:dong_phuc_296_web/src/widgets/theme.dart';
-import 'package:dong_phuc_296_web/src/util/strings.dart';
+import 'package:dongphuc296web/src/screen/admin/admin_add_product_screen.dart';
+import 'package:dongphuc296web/src/screen/admin/admin_list_orders_screen.dart';
+import 'package:dongphuc296web/src/screen/contact_us_screen.dart';
+import 'package:dongphuc296web/src/screen/intro_screen.dart';
+import 'package:dongphuc296web/src/screen/product_screen.dart';
+import 'package:dongphuc296web/src/widgets/page_status.dart';
+import 'package:dongphuc296web/src/widgets/scrim.dart';
+import 'package:dongphuc296web/src/widgets/layout_cache.dart';
+import 'package:dongphuc296web/src/widgets/theme.dart';
+import 'package:dongphuc296web/src/util/strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -27,22 +29,24 @@ import 'screen/home_screen.dart';
 import 'screen/login_screen.dart';
 import 'data/model/app_state_model.dart';
 import 'data/model/product_model.dart';
-import 'package:dong_phuc_296_web/src/routing/routes.dart' as routes;
+import 'package:dongphuc296web/src/routing/routes.dart' as routes;
 
-class ShrineApp extends StatefulWidget {
-  const ShrineApp({super.key});
+class Web296App extends StatefulWidget {
+  const Web296App({super.key});
 
   static const String loginRoute = routes.loginRoute;
   static const String homeRoute = routes.homeRoute;
   static const String introRoute = routes.introduceRoute;
   static const String chooseSizeRoute = routes.chooseSizeRoute;
   static const String contactUsRoute = routes.contactUsRoute;
+  static const String adminCreateProductRoute = routes.createProduct;
+  static const String adminListOrders = routes.orders;
 
   @override
-  State<ShrineApp> createState() => _ShrineAppState();
+  State<Web296App> createState() => _Web296AppState();
 }
 
-class _ShrineAppState extends State<ShrineApp>
+class _Web296AppState extends State<Web296App>
     with TickerProviderStateMixin, RestorationMixin {
   // Controller to coordinate both the opening/closing of backdrop and sliding
   // of expanding bottom sheet
@@ -191,13 +195,17 @@ class _ShrineAppState extends State<ShrineApp>
 
                       ///initRoute
                       // initialRoute: ShrineApp.loginRoute,
-                      initialRoute: ShrineApp.homeRoute,
+                      initialRoute: Web296App.homeRoute,
                       routes: {
                         // ShrineApp.loginRoute: (context) => const LoginScreen(),
-                        ShrineApp.homeRoute: (context) => homeScreenWidget,
-                        ShrineApp.introRoute: (context) => const IntroScreen(),
-                        ShrineApp.contactUsRoute: (context) =>
+                        Web296App.homeRoute: (context) => homeScreenWidget,
+                        Web296App.introRoute: (context) => const IntroScreen(),
+                        Web296App.contactUsRoute: (context) =>
                             const ContactUsScreen(),
+                        Web296App.adminCreateProductRoute: (context) =>
+                            const AdminAddProductScreen(),
+                        Web296App.adminListOrders: (context) =>
+                            const AdminListOrdersScreen(),
                       },
                       theme: web296Theme.copyWith(
                         platform: GetPlatform.isMobile

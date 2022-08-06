@@ -29,7 +29,7 @@ const firstHeaderDesktopTopPadding = 5.0;
 ///Phí ship, thuế
 const double salesTaxRate = 0;
 const double shippingFee = 0;
-const double shippingFeeCostPerItem = 2000;
+const double shippingFeeCostPerItem = 0;
 
 const Locale vnLocales = Locale('vi');
 const Locale enLocales = Locale('en');

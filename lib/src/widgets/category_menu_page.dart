@@ -2,10 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:dong_phuc_296_web/src/layout/text_scale.dart';
-import 'package:dong_phuc_296_web/src/data/model/product_model.dart';
-import 'package:dong_phuc_296_web/src/widgets/page_status.dart';
-import 'package:dong_phuc_296_web/src/widgets/web_296_logo_widget.dart';
+import 'package:dongphuc296web/src/layout/text_scale.dart';
+import 'package:dongphuc296web/src/data/model/product_model.dart';
+import 'package:dongphuc296web/src/widgets/page_status.dart';
+import 'package:dongphuc296web/src/widgets/web_296_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../data/gallery_options.dart';
@@ -127,7 +127,7 @@ class CategoryMenuPage extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             Navigator.of(context)
-                                .restorablePushNamed(ShrineApp.contactUsRoute);
+                                .restorablePushNamed(Web296App.contactUsRoute);
                           },
                           child: _buttonText(
                             web296CategoryNameContactUs,
@@ -136,23 +136,42 @@ class CategoryMenuPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Semantics(
-                      button: true,
-                      enabled: true,
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .restorablePushNamed(ShrineApp.introRoute);
-                          },
-                          child: _buttonText(
-                            web296CategoryNameIntro,
-                            logoutTextStyle,
-                          ),
-                        ),
-                      ),
-                    ),
+                    // //TODO: màn hình giới thiệu
+                    // Semantics(
+                    //   button: true,
+                    //   enabled: true,
+                    //   child: MouseRegion(
+                    //     cursor: SystemMouseCursors.click,
+                    //     child: GestureDetector(
+                    //       onTap: () {
+                    //         Navigator.of(context)
+                    //             .restorablePushNamed(Web296App.introRoute);
+                    //       },
+                    //       child: _buttonText(
+                    //         web296CategoryNameIntro,
+                    //         logoutTextStyle,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // //TODO: màn hình createProduct
+                    // Semantics(
+                    //   button: true,
+                    //   enabled: true,
+                    //   child: MouseRegion(
+                    //     cursor: SystemMouseCursors.click,
+                    //     child: GestureDetector(
+                    //       onTap: () {
+                    //         Navigator.of(context)
+                    //             .restorablePushNamed(Web296App.adminCreateProductRoute);
+                    //       },
+                    //       child: _buttonText(
+                    //         strCreateProduct,
+                    //         logoutTextStyle,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     _divider(context: context),
                     ///Đăng xuất
                     // Semantics(
@@ -209,7 +228,7 @@ class CategoryMenuPage extends StatelessWidget {
                               onCategoryTap!();
                             }
                             Navigator.of(context)
-                                .restorablePushNamed(ShrineApp.contactUsRoute);
+                                .restorablePushNamed(Web296App.contactUsRoute);
                           },
                           child: _buttonText(
                             web296CategoryNameContactUs,
@@ -229,7 +248,7 @@ class CategoryMenuPage extends StatelessWidget {
                               onCategoryTap!();
                             }
                             Navigator.of(context)
-                                .restorablePushNamed(ShrineApp.introRoute);
+                                .restorablePushNamed(Web296App.introRoute);
                           },
                           child: _buttonText(
                             web296CategoryNameIntro,
@@ -252,7 +271,7 @@ class CategoryMenuPage extends StatelessWidget {
                               onCategoryTap!();
                             }
                             Navigator.of(context)
-                                .restorablePushNamed(ShrineApp.loginRoute);
+                                .restorablePushNamed(Web296App.loginRoute);
                           },
                           child: _buttonText(
                             web296LogoutButtonCaption,

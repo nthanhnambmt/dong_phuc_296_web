@@ -21,20 +21,11 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -54,11 +45,39 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBYeNvfdAzrEZ2NgW5jqkqzj6rVZh3DegM',
-    appId: '1:1042952740806:web:bfb825b5fb9cdffc9e1cc7',
+    appId: '1:1042952740806:web:7dc4ecc288f41c699e1cc7',
     messagingSenderId: '1042952740806',
     projectId: 'dongphuc296web',
     authDomain: 'dongphuc296web.firebaseapp.com',
     storageBucket: 'dongphuc296web.appspot.com',
-    measurementId: 'G-D95C04LD2E',
+    measurementId: 'G-JPN1D5H02E',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyChRUQz_TVgayXlUX2-4x1YL3qgNOd-jGE',
+    appId: '1:1042952740806:android:ad1615067d49980f9e1cc7',
+    messagingSenderId: '1042952740806',
+    projectId: 'dongphuc296web',
+    storageBucket: 'dongphuc296web.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyA4_udDIbk-SxrQYxGl1u2zi3dcRwvdwdM',
+    appId: '1:1042952740806:ios:e50ef4250a7922909e1cc7',
+    messagingSenderId: '1042952740806',
+    projectId: 'dongphuc296web',
+    storageBucket: 'dongphuc296web.appspot.com',
+    iosClientId: '1042952740806-ulrdddu406o5ip0emr84am8pah59f662.apps.googleusercontent.com',
+    iosBundleId: 'dev.flutter.dongphuc296web',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyA4_udDIbk-SxrQYxGl1u2zi3dcRwvdwdM',
+    appId: '1:1042952740806:ios:e50ef4250a7922909e1cc7',
+    messagingSenderId: '1042952740806',
+    projectId: 'dongphuc296web',
+    storageBucket: 'dongphuc296web.appspot.com',
+    iosClientId: '1042952740806-ulrdddu406o5ip0emr84am8pah59f662.apps.googleusercontent.com',
+    iosBundleId: 'dev.flutter.dongphuc296web',
   );
 }
