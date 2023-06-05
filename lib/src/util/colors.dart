@@ -15,6 +15,7 @@ const Color web296Brown900 = Color(0xFF442B2D);
 const Color web296Brown600 = Color(0xFF7D4F52);
 
 const Color web296ErrorRed = Color(0xFFC5032B);
+const Color web296Blue = Color(0xFF0340C5);
 
 const Color web296SurfaceWhite = Color(0xFFFFFBFA);
 const Color web296BackgroundWhite = Colors.white;

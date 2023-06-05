@@ -57,8 +57,8 @@ class CartRowWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  product.getImageName,
-                  package: product.getThumbNail,
+                  product.getThumbNailName,
+                  package: product.getThumbNailFolder,
                   fit: BoxFit.cover,
                   width: 75,
                   height: 75,

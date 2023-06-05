@@ -166,6 +166,7 @@ class _CartWidgetState extends State<CartWidget> {
                   height: 10,
                 ),
                 EditTextWidget(
+                  isReadOnly: false,
                   hintText: receiverName,
                   myController: receiverNameController,
                   validator: (val) {
@@ -178,6 +179,7 @@ class _CartWidgetState extends State<CartWidget> {
                   height: 10,
                 ),
                 EditTextWidget(
+                  isReadOnly: false,
                   hintText: receiverPhone,
                   myController: receiverPhoneController,
                   validator: (val) {
@@ -190,6 +192,7 @@ class _CartWidgetState extends State<CartWidget> {
                   height: 10,
                 ),
                 EditTextWidget(
+                  isReadOnly: false,
                   hintText: receiverAddress,
                   myController: receiverAddressController,
                   validator: (val) {

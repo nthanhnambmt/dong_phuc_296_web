@@ -9,9 +9,7 @@ import 'package:dongphuc296web/src/app.dart'
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:url_strategy/url_strategy.dart';
-import 'package:window_size/window_size.dart';import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:window_size/window_size.dart';
 
 import 'firebase_options.dart';
 import 'src/widgets/deferred_widget.dart';

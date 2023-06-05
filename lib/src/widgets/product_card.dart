@@ -2,7 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:js';
+
 import 'package:dongphuc296web/src/extensions/extensions.dart';
+import 'package:dongphuc296web/src/screen/product_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -79,11 +82,13 @@ Widget _buildProductCard({
   );
   final theme = Theme.of(context);
   final imageWidget = FadeInImagePlaceholder(
-    image: AssetImage(product.getImageName, package: product.getThumbNail),
+    image: AssetImage(product.getThumbNailName, package: product.getThumbNailFolder),
     placeholder: Container(
       color: Colors.black.withOpacity(0.1),
       width: imageWidth,
-      height: imageWidth == null ? null : imageWidth / product.assetAspectRatio.valueOrDoubleDefault(1),
+      height: imageWidth == null
+          ? null
+          : imageWidth / product.assetAspectRatio.valueOrDoubleDefault(1),
     ),
     fit: BoxFit.cover,
     width: isDesktop ? imageWidth : null,
@@ -92,14 +97,15 @@ Widget _buildProductCard({
   );
 
   return ScopedModelDescendant<AppStateModel>(
-    builder: (context, child, model) {
+    builder: (context, child, appStateModel) {
       return Semantics(
         hint: web296ScreenReaderProductAddToCart,
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
-              model.addProductToCart(product);
+              addToCart(appStateModel, product);
+              // openProductDetail(product, context);
             },
             child: child,
           ),
@@ -126,8 +132,7 @@ Widget _buildProductCard({
                   const SizedBox(height: 23),
                   SizedBox(
                     width: imageWidth,
-                    child:
-                    SelectableText(
+                    child: SelectableText(
                       product.productName.valueOrEmptyString(),
                       style: theme.textTheme.button,
                       textAlign: TextAlign.center,
@@ -154,6 +159,21 @@ Widget _buildProductCard({
           child: Icon(Icons.add_shopping_cart),
         ),
       ],
+    ),
+  );
+}
+
+void addToCart(AppStateModel appStateModel, ProductModel product) {
+  appStateModel.addProductToCart(product);
+}
+
+Future<void> openProductDetail(
+    ProductModel productModel, BuildContext context) async {
+  await Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => ProductDetailScreen(
+        productModel: productModel,
+      ),
     ),
   );
 }

@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/platform/platform.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -114,12 +115,12 @@ class Utils {
   //   return AppStorage().user.read(SharefKey.DEVICE_TOKEN);
   // }
 
-  // static String formatMoney(BuildContext context, dynamic value) {
-  //   // if you want to add currency symbol then
-  //   // pass that in this else leave it empty.
-  //   return NumberFormat.currency(decimalDigits: 0, symbol: '', locale: 'en')
-  //       .format(value);
-  // }
+  static String formatMoney(BuildContext context, dynamic value) {
+    // if you want to add currency symbol then
+    // pass that in this else leave it empty.
+    return NumberFormat.currency(decimalDigits: 0, symbol: '', locale: 'en')
+        .format(value);
+  }
 
   static String formatTime(BuildContext context, int value) {
     final dur = Duration(

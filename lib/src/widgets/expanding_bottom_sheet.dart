@@ -749,8 +749,8 @@ class ProductThumbnail extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: ExactAssetImage(
-                product.getImageName, // asset name
-                package: product.getThumbNail, // asset package
+                product.getThumbNailName, // asset name
+                package: product.getThumbNailFolder, // asset package
               ),
               fit: BoxFit.cover,
             ),

@@ -103,7 +103,7 @@ class FooterWidget extends StatelessWidget {
                 title: '$textAddress:',
                 content: '$addressMobile',
                 isClickable: false),
-            SizedBox(width: 10.0),
+            SizedBox(width: 28.0),
             ButtonWidget(
                 buttonText: footerTextHotLine,
                 onTap: () => launchUrlString(callPhoneButton)),
@@ -207,7 +207,7 @@ class FooterWidget extends StatelessWidget {
               height: heightIcon,
             ),
           ),
-          onTap: () => {Utils.launchLink(youtubeLink)},
+          onTap: () => {Utils.launchLink(faceBookLink)},
         ),
         SizedBox(width: 10.0),
         InkWell(

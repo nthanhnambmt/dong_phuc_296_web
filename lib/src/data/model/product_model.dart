@@ -79,11 +79,8 @@ class ProductModel {
     };
   }
 
-  String get getImageName => '$productId.jpg';
+  String get getThumbNailName => '0.jpg';
+  String get getThumbNailFolder => 'product_images/$productId';
 
-  String get getThumbNail => 'product_images';
-
-  String get getImage2x => 'product_images/2x';
-
-  String get getImage3x => 'product_images/3x';
+  String get getFullImageFolder => 'product_images/$productId/full';
 }

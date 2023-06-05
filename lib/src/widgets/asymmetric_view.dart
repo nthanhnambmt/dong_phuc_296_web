@@ -4,15 +4,16 @@
 
 import 'dart:math';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dongphuc296web/src/widgets/product_card.dart';
 import 'package:dongphuc296web/src/widgets/product_columns.dart';
 import 'package:flutter/material.dart';
-
 
 import '../data/gallery_options.dart';
 import '../data/model/product_model.dart';
 import '../layout/text_scale.dart';
 import 'balanced_layout.dart';
+import 'banner_with_indicator.dart';
 import 'category_menu_page.dart';
 import 'page_status.dart';
 import 'desktop_product_columns.dart';
@@ -145,22 +146,41 @@ class MobileAsymmetricView extends StatelessWidget {
           excluding: !productPageIsVisible(context),
           child: LayoutBuilder(
             builder: (context, constraints) {
-              return ListView(
-                restorationId: 'product_page_list_view',
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsetsDirectional.fromSTEB(
-                  0,
-                  _topPadding,
-                  16,
-                  _bottomPadding,
-                ),
-                physics: const AlwaysScrollableScrollPhysics(),
-                children: _buildColumns(context, constraints),
-              );
+              return buildListProductMobile(context, constraints)
+                  //   SingleChildScrollView(
+                  //     child:
+                  //     buildListProductMobile(context, constraints)
+                  //
+                  //   //   Column(
+                  //   // children: [
+                  //   //   //TODO: Chưa hiện banner cho điện thoại được
+                  //   //   // BannerWithIndicatorWidget(),
+                  //   //   buildListProductMobile(context, constraints)
+                  //   // ],
+                  // // )
+                  // )
+                  ;
             },
           ),
         ),
       ),
+    );
+  }
+
+  ListView buildListProductMobile(
+      BuildContext context, BoxConstraints constraints) {
+    return ListView(
+      restorationId: 'product_page_list_view',
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsetsDirectional.fromSTEB(
+        0,
+        _topPadding,
+        16,
+        _bottomPadding,
+      ),
+      physics: const AlwaysScrollableScrollPhysics(),
+      children: _buildColumns(context, constraints),
     );
   }
 }
@@ -270,11 +290,23 @@ class DesktopColumns extends StatelessWidget {
       },
     );
 
-    return ListView(
-      scrollDirection: Axis.vertical,
-      physics: const AlwaysScrollableScrollPhysics(),
+    return SingleChildScrollView(
+        child: Column(
       children: [
-        Container(height: 60),
+        BannerWithIndicatorWidget(),
+        buildListProductDesktop(productCardColumns, gap)
+      ],
+    ));
+  }
+
+  ListView buildListProductDesktop(
+      List<DesktopProductCardColumn> productCardColumns, Widget gap) {
+    return ListView(
+      // scrollDirection: Axis.vertical,
+      // physics: const AlwaysScrollableScrollPhysics(),
+      shrinkWrap: true,
+      children: [
+        Container(height: 30),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

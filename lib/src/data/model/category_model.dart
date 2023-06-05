@@ -62,6 +62,11 @@ CategoryModel categoryCanvas = CategoryModel(
   catName: web296CategoryNameCanvas,
 );
 
+CategoryModel categoryGift = CategoryModel(
+  catId: 12,
+  catName: web296CategoryNameGift,
+);
+
 List<CategoryModel> categories = [
   categoryAll,
   categoryUniform,
@@ -72,6 +77,7 @@ List<CategoryModel> categories = [
   categoryAccessories,
   categoryCanvas,
   categoryPrint,
+  categoryGift
   // categoryClothing,
   // categoryHome,
 ];

@@ -4,6 +4,7 @@
 
 import 'package:dongphuc296web/src/screen/admin/admin_add_product_screen.dart';
 import 'package:dongphuc296web/src/screen/admin/admin_list_orders_screen.dart';
+import 'package:dongphuc296web/src/screen/calendar_screen.dart';
 import 'package:dongphuc296web/src/screen/contact_us_screen.dart';
 import 'package:dongphuc296web/src/screen/intro_screen.dart';
 import 'package:dongphuc296web/src/screen/product_screen.dart';
@@ -39,6 +40,9 @@ class Web296App extends StatefulWidget {
   static const String introRoute = routes.introduceRoute;
   static const String chooseSizeRoute = routes.chooseSizeRoute;
   static const String contactUsRoute = routes.contactUsRoute;
+  static const String calendarRoute = routes.calendarRoute;
+
+  //WEB ADMIN
   static const String adminCreateProductRoute = routes.createProduct;
   static const String adminListOrders = routes.orders;
 
@@ -202,6 +206,8 @@ class _Web296AppState extends State<Web296App>
                         Web296App.introRoute: (context) => const IntroScreen(),
                         Web296App.contactUsRoute: (context) =>
                             const ContactUsScreen(),
+                        Web296App.calendarRoute: (context) =>
+                            const CalendarScreen(),
                         Web296App.adminCreateProductRoute: (context) =>
                             const AdminAddProductScreen(),
                         Web296App.adminListOrders: (context) =>

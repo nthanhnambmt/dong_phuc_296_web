@@ -1,19 +1,25 @@
 import 'dart:core';
 
+///PHOTO PATH
 const String logoPath = 'packages/web_images/logo_goc_jpg-250.jpg';
 const String iconLogoPath = 'packages/web_images/rsz_logo_goc_png_fb.png';
 // const String iconLogoPath = 'packages/web_images/diamond.png';
 const String menuIconPath = 'packages/web_images/slanted_menu.png';
 const String googleMapIconPath = 'packages/web_images/google_map.jpg';
 const String googleMapMobileIconPath = 'packages/web_images/google_map_mobile.png';
+const String banner1Path = 'packages/web_images/banner_1.png';
+const String banner2Path = 'packages/web_images/banner_3.png';
+const String banner3Path = 'packages/web_images/banner_2.png';
+const String banner4Path = 'packages/web_images/banner_1.png';
+
 const String text296 = '296';
 const String textDongPhuc296 = 'Đồng phục 296';
 const String textShortIntro = 'Đồng phục 296';
 const String textLongIntro = 'Đồng phục 296';
 const String contactUs = 'Liên hệ';
 const String textAddress = 'Địa chỉ';
-const String address = '296/1 Nguyễn Văn Cừ, p.Tân Lập, tp.Buôn Ma Thuột, DakLak';
-const String addressMobile = '296/1 Nguyễn Văn Cừ, p.Tân Lập,\ntp.Buôn Ma Thuột, DakLak';
+const String address = '296 Nguyễn Văn Cừ, p.Tân Lập, tp.Buôn Ma Thuột, DakLak';
+const String addressMobile = '296 Nguyễn Văn Cừ, p.Tân Lập,\ntp.Buôn Ma Thuột, DakLak';
 const String textAddressHCM = 'Địa chỉ HCM';
 const String addressHCM = '80 đường số 9, p.Trường Thọ, tp.Thủ Đức, HCM';
 const String addressMobileHCM = '80 đường số 9, p.Trường Thọ,\ntp.Thủ Đức, HCM';
@@ -54,6 +60,7 @@ const String web296CategoryNameDress = 'Váy-Đầm';
 const String web296CategoryNameNightdress = 'Váy ngủ';
 const String web296CategoryNameCanvas = 'Túi-Balo Canvas';
 const String web296CategoryNamePrint = 'In vải';
+const String web296CategoryNameGift = 'Quà tặng';
 
 //
 // /// A category of products consisting of items used at home.
@@ -61,18 +68,9 @@ const String web296CategoryNamePrint = 'In vải';
 // /// In en, this message translates to:
 // /// **'HOME'**
 const String web296CategoryNameHome = 'Home';
-//
-// /// A category of products consisting of items used at home.
-// ///
-// /// In en, this message translates to:
-// /// **'INTRO'**
 const String web296CategoryNameIntro = 'Giới thiệu';
-//
-// /// A category of products consisting of items used at home.
-// ///
-// /// In en, this message translates to:
-// /// **'INTRO'**
 const String web296CategoryNameContactUs = 'Liên hệ';
+const String web296CategoryNameCalendar = 'Giá lịch 2023';
 //
 // /// Label for a logout button.
 // ///
@@ -231,3 +229,11 @@ const String strProductPrice = 'Giá sản phẩm';
 const String strProductAspectRatio = 'Tỉ lệ hình rộng/cao';
 const String strProductCategoryId = 'Category ID';
 const String strProductCategoryName = 'Category name';
+
+///Calendar
+const String strCalendarQuantity = 'Số lượng';
+const String strCalendarPrice = 'Đơn giá';
+const String strCalendarTotal = 'Tổng cộng';
+const String deBanChuA = 'packages/web_images/lich_de_ban_chu_a.jpg';
+const String deBanChuACoHop = 'packages/web_images/lich_de_ban_chu_a_co_hop.jpg';
+const String goTrangGuong = 'packages/web_images/lich_go_trang_guong.jpg';

@@ -98,6 +98,11 @@ class CategoryMenuPage extends StatelessWidget {
           color: web296Brown900.withOpacity(0.6),
         );
 
+    final calendarTextStyle = Theme.of(context).textTheme.bodyText1!.copyWith(
+          fontSize: isDesktop ? 17 : 19,
+          color: web296Blue.withOpacity(0.6),
+        );
+
     if (isDesktop) {
       return AnimatedBuilder(
         animation: PageStatus.of(context)!.cartController,
@@ -132,6 +137,23 @@ class CategoryMenuPage extends StatelessWidget {
                           child: _buttonText(
                             web296CategoryNameContactUs,
                             logoutTextStyle,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Semantics(
+                      button: true,
+                      enabled: true,
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .restorablePushNamed(Web296App.calendarRoute);
+                          },
+                          child: _buttonText(
+                            web296CategoryNameCalendar,
+                            calendarTextStyle,
                           ),
                         ),
                       ),
@@ -248,38 +270,58 @@ class CategoryMenuPage extends StatelessWidget {
                               onCategoryTap!();
                             }
                             Navigator.of(context)
-                                .restorablePushNamed(Web296App.introRoute);
+                                .restorablePushNamed(Web296App.calendarRoute);
                           },
                           child: _buttonText(
-                            web296CategoryNameIntro,
-                            logoutTextStyle,
+                            web296CategoryNameCalendar,
+                            calendarTextStyle,
                           ),
                         ),
                       ),
                     ),
+                    // Semantics(
+                    //   button: true,
+                    //   enabled: true,
+                    //   child: MouseRegion(
+                    //     cursor: SystemMouseCursors.click,
+                    //     child: GestureDetector(
+                    //       onTap: () {
+                    //         if (onCategoryTap != null) {
+                    //           onCategoryTap!();
+                    //         }
+                    //         Navigator.of(context)
+                    //             .restorablePushNamed(Web296App.introRoute);
+                    //       },
+                    //       child: _buttonText(
+                    //         web296CategoryNameIntro,
+                    //         logoutTextStyle,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     Center(
                       child: _divider(context: context),
                     ),
-                    Semantics(
-                      button: true,
-                      enabled: true,
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: () {
-                            if (onCategoryTap != null) {
-                              onCategoryTap!();
-                            }
-                            Navigator.of(context)
-                                .restorablePushNamed(Web296App.loginRoute);
-                          },
-                          child: _buttonText(
-                            web296LogoutButtonCaption,
-                            logoutTextStyle,
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Semantics(
+                    //   button: true,
+                    //   enabled: true,
+                    //   child: MouseRegion(
+                    //     cursor: SystemMouseCursors.click,
+                    //     child: GestureDetector(
+                    //       onTap: () {
+                    //         if (onCategoryTap != null) {
+                    //           onCategoryTap!();
+                    //         }
+                    //         Navigator.of(context)
+                    //             .restorablePushNamed(Web296App.loginRoute);
+                    //       },
+                    //       child: _buttonText(
+                    //         web296LogoutButtonCaption,
+                    //         logoutTextStyle,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
