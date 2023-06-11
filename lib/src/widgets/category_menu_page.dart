@@ -118,12 +118,49 @@ class CategoryMenuPage extends StatelessWidget {
                   shrinkWrap: true,
                   children: [
                     const SizedBox(height: 10),
-                    Web296LogoWidget(isSmallText: true),
+                    // Web296LogoWidget(isSmallText: true),
                     const SizedBox(height: 20),
                     ///Dùng Spacer bị lỗi Incorrect use of ParentDataWidget.
                     // const Spacer(),
-                    for (final category in categories)
-                      _buildCategory(category, context),
+                    // for (final category in categories)
+                    //   _buildCategory(category, context),
+                    // Semantics(
+                    //   button: true,
+                    //   enabled: true,
+                    //   child: MouseRegion(
+                    //     cursor: SystemMouseCursors.click,
+                    //     child: GestureDetector(
+                    //       onTap: () {
+                    //         Navigator.of(context)
+                    //             .restorablePushNamed(Web296App.contactUsRoute);
+                    //       },
+                    //       child: _buttonText(
+                    //         web296CategoryNameContactUs,
+                    //         logoutTextStyle,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+
+
+                    // Semantics(
+                    //   button: true,
+                    //   enabled: true,
+                    //   child: MouseRegion(
+                    //     cursor: SystemMouseCursors.click,
+                    //     child: GestureDetector(
+                    //       onTap: () {
+                    //         Navigator.of(context)
+                    //             .restorablePushNamed(Web296App.calendarRoute);
+                    //       },
+                    //       child: _buttonText(
+                    //         web296CategoryNameCalendar,
+                    //         calendarTextStyle,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+
                     Semantics(
                       button: true,
                       enabled: true,
@@ -132,32 +169,34 @@ class CategoryMenuPage extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             Navigator.of(context)
-                                .restorablePushNamed(Web296App.contactUsRoute);
+                                .restorablePushNamed(Web296App.cheDoHoatDongRoute);
                           },
                           child: _buttonText(
-                            web296CategoryNameContactUs,
-                            logoutTextStyle,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Semantics(
-                      button: true,
-                      enabled: true,
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .restorablePushNamed(Web296App.calendarRoute);
-                          },
-                          child: _buttonText(
-                            web296CategoryNameCalendar,
+                            cheDoHoatDong,
                             calendarTextStyle,
                           ),
                         ),
                       ),
                     ),
+                    Semantics(
+                      button: true,
+                      enabled: true,
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .restorablePushNamed(Web296App.thongTinVuonRauRoute);
+                          },
+                          child: _buttonText(
+                            textThongTinVuonRau,
+                            calendarTextStyle,
+                          ),
+                        ),
+                      ),
+                    ),
+
+
                     // //TODO: màn hình giới thiệu
                     // Semantics(
                     //   button: true,
@@ -237,8 +276,93 @@ class CategoryMenuPage extends StatelessWidget {
                 color: bgCategory,
                 child: ListView(
                   children: [
-                    for (final category in categories)
-                      _buildCategory(category, context),
+                    // for (final category in categories)
+                    //   _buildCategory(category, context),
+                    // Semantics(
+                    //   button: true,
+                    //   enabled: true,
+                    //   child: MouseRegion(
+                    //     cursor: SystemMouseCursors.click,
+                    //     child: GestureDetector(
+                    //       onTap: () {
+                    //         if (onCategoryTap != null) {
+                    //           onCategoryTap!();
+                    //         }
+                    //         Navigator.of(context)
+                    //             .restorablePushNamed(Web296App.contactUsRoute);
+                    //       },
+                    //       child: _buttonText(
+                    //         web296CategoryNameContactUs,
+                    //         logoutTextStyle,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // Semantics(
+                    //   button: true,
+                    //   enabled: true,
+                    //   child: MouseRegion(
+                    //     cursor: SystemMouseCursors.click,
+                    //     child: GestureDetector(
+                    //       onTap: () {
+                    //         if (onCategoryTap != null) {
+                    //           onCategoryTap!();
+                    //         }
+                    //         Navigator.of(context)
+                    //             .restorablePushNamed(Web296App.calendarRoute);
+                    //       },
+                    //       child: _buttonText(
+                    //         web296CategoryNameCalendar,
+                    //         calendarTextStyle,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    //
+                    // // Semantics(
+                    // //   button: true,
+                    // //   enabled: true,
+                    // //   child: MouseRegion(
+                    // //     cursor: SystemMouseCursors.click,
+                    // //     child: GestureDetector(
+                    // //       onTap: () {
+                    // //         if (onCategoryTap != null) {
+                    // //           onCategoryTap!();
+                    // //         }
+                    // //         Navigator.of(context)
+                    // //             .restorablePushNamed(Web296App.introRoute);
+                    // //       },
+                    // //       child: _buttonText(
+                    // //         web296CategoryNameIntro,
+                    // //         logoutTextStyle,
+                    // //       ),
+                    // //     ),
+                    // //   ),
+                    // // ),
+                    // Center(
+                    //   child: _divider(context: context),
+                    // ),
+                    // // Semantics(
+                    // //   button: true,
+                    // //   enabled: true,
+                    // //   child: MouseRegion(
+                    // //     cursor: SystemMouseCursors.click,
+                    // //     child: GestureDetector(
+                    // //       onTap: () {
+                    // //         if (onCategoryTap != null) {
+                    // //           onCategoryTap!();
+                    // //         }
+                    // //         Navigator.of(context)
+                    // //             .restorablePushNamed(Web296App.loginRoute);
+                    // //       },
+                    // //       child: _buttonText(
+                    // //         web296LogoutButtonCaption,
+                    // //         logoutTextStyle,
+                    // //       ),
+                    // //     ),
+                    // //   ),
+                    // // ),
+
                     Semantics(
                       button: true,
                       enabled: true,
@@ -246,82 +370,33 @@ class CategoryMenuPage extends StatelessWidget {
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
                           onTap: () {
-                            if (onCategoryTap != null) {
-                              onCategoryTap!();
-                            }
                             Navigator.of(context)
-                                .restorablePushNamed(Web296App.contactUsRoute);
+                                .restorablePushNamed(Web296App.cheDoHoatDongRoute);
                           },
                           child: _buttonText(
-                            web296CategoryNameContactUs,
-                            logoutTextStyle,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Semantics(
-                      button: true,
-                      enabled: true,
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: () {
-                            if (onCategoryTap != null) {
-                              onCategoryTap!();
-                            }
-                            Navigator.of(context)
-                                .restorablePushNamed(Web296App.calendarRoute);
-                          },
-                          child: _buttonText(
-                            web296CategoryNameCalendar,
+                            cheDoHoatDong,
                             calendarTextStyle,
                           ),
                         ),
                       ),
                     ),
-                    // Semantics(
-                    //   button: true,
-                    //   enabled: true,
-                    //   child: MouseRegion(
-                    //     cursor: SystemMouseCursors.click,
-                    //     child: GestureDetector(
-                    //       onTap: () {
-                    //         if (onCategoryTap != null) {
-                    //           onCategoryTap!();
-                    //         }
-                    //         Navigator.of(context)
-                    //             .restorablePushNamed(Web296App.introRoute);
-                    //       },
-                    //       child: _buttonText(
-                    //         web296CategoryNameIntro,
-                    //         logoutTextStyle,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    Center(
-                      child: _divider(context: context),
+                    Semantics(
+                      button: true,
+                      enabled: true,
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .restorablePushNamed(Web296App.thongTinVuonRauRoute);
+                          },
+                          child: _buttonText(
+                            textThongTinVuonRau,
+                            calendarTextStyle,
+                          ),
+                        ),
+                      ),
                     ),
-                    // Semantics(
-                    //   button: true,
-                    //   enabled: true,
-                    //   child: MouseRegion(
-                    //     cursor: SystemMouseCursors.click,
-                    //     child: GestureDetector(
-                    //       onTap: () {
-                    //         if (onCategoryTap != null) {
-                    //           onCategoryTap!();
-                    //         }
-                    //         Navigator.of(context)
-                    //             .restorablePushNamed(Web296App.loginRoute);
-                    //       },
-                    //       child: _buttonText(
-                    //         web296LogoutButtonCaption,
-                    //         logoutTextStyle,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

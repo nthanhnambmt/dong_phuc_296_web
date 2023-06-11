@@ -7,18 +7,20 @@ import '../layout/letter_spacing.dart';
 import '../screen/intro_screen.dart';
 import '../util/colors.dart';
 
-class EditTextWidget extends StatelessWidget {
-  const EditTextWidget({
+class PasswordInputWidget extends StatelessWidget {
+  const PasswordInputWidget({
     required this.hintText,
     required this.myController,
     this.inputFormatters,
     this.validator,
     this.onTextChange,
     required this.isReadOnly,
+    required this.isObscure,
   });
 
   final String hintText;
   final bool isReadOnly;
+  final bool isObscure;
   final TextEditingController myController;
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
@@ -31,11 +33,10 @@ class EditTextWidget extends StatelessWidget {
     return PrimaryColorOverride(
       color: web296Brown900,
       child: TextFormField(
+        obscureText: isObscure,
         readOnly: isReadOnly,
         controller: myController,
         onChanged: (value) {
-          debugPrint('-------------EditTextWidget onChanged: ${value}');
-
           if (onTextChange != null) onTextChange!(value);
         },
         textInputAction: TextInputAction.next,

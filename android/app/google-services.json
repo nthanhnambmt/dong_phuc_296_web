@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1042952740806",
+    "firebase_url": "https://dongphuc296web-default-rtdb.firebaseio.com",
     "project_id": "dongphuc296web",
     "storage_bucket": "dongphuc296web.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1042952740806-hsmisgfij3dhd9fl5mffe8o8kf6kvfob.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.flutter.dongphuc296web",
+            "certificate_hash": "5b8561fe0551f042fc22860d320490d495dc6bf9"
+          }
+        },
         {
           "client_id": "1042952740806-evpqb755601tvpfpmhugcoglrbuku6qm.apps.googleusercontent.com",
           "client_type": 3

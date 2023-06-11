@@ -2,18 +2,30 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:html';
+import 'dart:js';
+
+import 'package:dongphuc296web/src/data/model/account_model.dart';
 import 'package:dongphuc296web/src/data/model/order_model.dart';
 import 'package:dongphuc296web/src/data/model/product_model.dart';
 import 'package:dongphuc296web/src/data/repository/orders_repository.dart';
 import 'package:dongphuc296web/src/data/repository/products_repository.dart';
 import 'package:dongphuc296web/src/extensions/extensions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import '../../app.dart';
 import '../../util/constants.dart';
 import '../../util/query_enum.dart';
+import '../../util/strings.dart';
+import '../../util/utils.dart';
+import '../repository/account_repository.dart';
 import 'category_model.dart';
 
 class AppStateModel extends Model {
+  bool loggedin = true;
+  AccountModel _accountLoggedin = AccountModel();
+
   // All the available products.
   List<ProductModel> _availableProducts = [];
   List<OrderModel> _availableOrders = [];
@@ -185,5 +197,58 @@ class AppStateModel extends Model {
   @override
   String toString() {
     return 'AppStateModel(totalCost: $totalCost)';
+  }
+
+  Future<void> logOut() async {
+    await Future<void>.delayed(const Duration(milliseconds: 200));
+    // Sign out.
+    loggedin = false;
+    notifyListeners();
+  }
+
+  Future<bool> logIn(AccountModel loginAccount, BuildContext context) async {
+    print(
+        '---------------->>>>>>>>>>>>>>>>>>>>>>logIn    ${loginAccount.toJson()}');
+
+    _accountLoggedin = await AccountRepository().loginAccount(loginAccount);
+
+    // Check Sign in result.
+    if (_accountLoggedin.registerCode == web296LoginCodeFailUserName) {
+      loggedin = false;
+      Utils.showAlertDialog(context, web296LoginFailUserName);
+    } else {
+      if (_accountLoggedin.password == loginAccount.password) {
+        loggedin = true;
+        Navigator.of(context).restorablePushNamed(Web296App.homeRoute);
+      } else
+        Utils.showAlertDialog(context, web296LoginFailPassword);
+    }
+
+    notifyListeners();
+    return loggedin;
+  }
+
+  Future<bool> registerAccount(
+      AccountModel registerAccount, BuildContext context) async {
+    print(
+        '---------------->>>>>>>>>>>>>>>>>>>>>>registerAccount    ${registerAccount.toJson()}');
+
+    _accountLoggedin =
+        await AccountRepository().registerAccount(registerAccount);
+
+    // Check Sign in result.
+    if (_accountLoggedin.registerCode == web296RegisterCodeFailAccountExists) {
+      loggedin = false;
+      Utils.showAlertDialog(context, web296AccountExists);
+    } else if (_accountLoggedin.registerCode == web296RegisterCodeFail) {
+      loggedin = false;
+      Utils.showAlertDialog(context, web296RegisterCodeFail);
+    } else {
+      loggedin = true;
+      Navigator.of(context).restorablePushNamed(Web296App.homeRoute);
+    }
+
+    notifyListeners();
+    return loggedin;
   }
 }

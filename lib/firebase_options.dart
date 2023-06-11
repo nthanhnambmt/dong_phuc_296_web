@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1042952740806',
     projectId: 'dongphuc296web',
     authDomain: 'dongphuc296web.firebaseapp.com',
+    databaseURL: 'https://dongphuc296web-default-rtdb.firebaseio.com',
     storageBucket: 'dongphuc296web.appspot.com',
     measurementId: 'G-JPN1D5H02E',
   );
@@ -58,6 +59,7 @@ class DefaultFirebaseOptions {
     appId: '1:1042952740806:android:ad1615067d49980f9e1cc7',
     messagingSenderId: '1042952740806',
     projectId: 'dongphuc296web',
+    databaseURL: 'https://dongphuc296web-default-rtdb.firebaseio.com',
     storageBucket: 'dongphuc296web.appspot.com',
   );
 
@@ -66,7 +68,9 @@ class DefaultFirebaseOptions {
     appId: '1:1042952740806:ios:e50ef4250a7922909e1cc7',
     messagingSenderId: '1042952740806',
     projectId: 'dongphuc296web',
+    databaseURL: 'https://dongphuc296web-default-rtdb.firebaseio.com',
     storageBucket: 'dongphuc296web.appspot.com',
+    androidClientId: '1042952740806-hsmisgfij3dhd9fl5mffe8o8kf6kvfob.apps.googleusercontent.com',
     iosClientId: '1042952740806-ulrdddu406o5ip0emr84am8pah59f662.apps.googleusercontent.com',
     iosBundleId: 'dev.flutter.dongphuc296web',
   );
@@ -76,7 +80,9 @@ class DefaultFirebaseOptions {
     appId: '1:1042952740806:ios:e50ef4250a7922909e1cc7',
     messagingSenderId: '1042952740806',
     projectId: 'dongphuc296web',
+    databaseURL: 'https://dongphuc296web-default-rtdb.firebaseio.com',
     storageBucket: 'dongphuc296web.appspot.com',
+    androidClientId: '1042952740806-hsmisgfij3dhd9fl5mffe8o8kf6kvfob.apps.googleusercontent.com',
     iosClientId: '1042952740806-ulrdddu406o5ip0emr84am8pah59f662.apps.googleusercontent.com',
     iosBundleId: 'dev.flutter.dongphuc296web',
   );

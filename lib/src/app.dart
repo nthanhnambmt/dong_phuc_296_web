@@ -6,8 +6,12 @@ import 'package:dongphuc296web/src/screen/admin/admin_add_product_screen.dart';
 import 'package:dongphuc296web/src/screen/admin/admin_list_orders_screen.dart';
 import 'package:dongphuc296web/src/screen/calendar_screen.dart';
 import 'package:dongphuc296web/src/screen/contact_us_screen.dart';
+import 'package:dongphuc296web/src/screen/web_mo/che_do_hoat_dong_screen.dart';
 import 'package:dongphuc296web/src/screen/intro_screen.dart';
 import 'package:dongphuc296web/src/screen/product_screen.dart';
+import 'package:dongphuc296web/src/screen/web_mo/login_farm_screen.dart';
+import 'package:dongphuc296web/src/screen/web_mo/registerr_farm_screen.dart';
+import 'package:dongphuc296web/src/screen/web_mo/thong_tin_vuon_rau_screen.dart';
 import 'package:dongphuc296web/src/widgets/page_status.dart';
 import 'package:dongphuc296web/src/widgets/scrim.dart';
 import 'package:dongphuc296web/src/widgets/layout_cache.dart';
@@ -41,6 +45,12 @@ class Web296App extends StatefulWidget {
   static const String chooseSizeRoute = routes.chooseSizeRoute;
   static const String contactUsRoute = routes.contactUsRoute;
   static const String calendarRoute = routes.calendarRoute;
+
+  //WEB MO
+  static const String loginFarmRoute = routes.loginFarmRoute;
+  static const String registerFarmRoute = routes.registerFarmRoute;
+  static const String cheDoHoatDongRoute = routes.cheDoHoatDongRoute;
+  static const String thongTinVuonRauRoute = routes.thongTinVuonRauRoute;
 
   //WEB ADMIN
   static const String adminCreateProductRoute = routes.createProduct;
@@ -120,7 +130,8 @@ class _Web296AppState extends State<Web296App>
 
   Widget mobileBackdrop() {
     return Backdrop(
-      frontLayer: const ProductPage(),
+      // frontLayer: const ProductPage(),
+      frontLayer: Container(),
       backLayer: CategoryMenuPage(onCategoryTap: () => _controller.forward()),
       frontTitle: Text(textDongPhuc296),
       backTitle: Text(textDongPhuc296),
@@ -129,8 +140,9 @@ class _Web296AppState extends State<Web296App>
   }
 
   Widget desktopBackdrop() {
-    return const DesktopBackdrop(
-      frontLayer: ProductPage(),
+    return  DesktopBackdrop(
+      // frontLayer: ProductPage(),
+      frontLayer: Container(),
       backLayer: CategoryMenuPage(),
     );
   }
@@ -158,7 +170,8 @@ class _Web296AppState extends State<Web296App>
       child: PageStatus(
         menuController: _controller,
         cartController: _expandingController,
-        child: HomeScreen(
+        child:
+        HomeScreen(
           backdrop: backdrop,
           scrim: Scrim(controller: _expandingController),
           expandingBottomSheet: ExpandingBottomSheet(
@@ -198,20 +211,28 @@ class _Web296AppState extends State<Web296App>
                       debugShowCheckedModeBanner: false,
 
                       ///initRoute
-                      // initialRoute: ShrineApp.loginRoute,
                       initialRoute: Web296App.homeRoute,
+                      // initialRoute: Web296App.loginFarmRoute,
                       routes: {
-                        // ShrineApp.loginRoute: (context) => const LoginScreen(),
                         Web296App.homeRoute: (context) => homeScreenWidget,
                         Web296App.introRoute: (context) => const IntroScreen(),
                         Web296App.contactUsRoute: (context) =>
                             const ContactUsScreen(),
                         Web296App.calendarRoute: (context) =>
                             const CalendarScreen(),
+
                         Web296App.adminCreateProductRoute: (context) =>
                             const AdminAddProductScreen(),
                         Web296App.adminListOrders: (context) =>
                             const AdminListOrdersScreen(),
+                        Web296App.cheDoHoatDongRoute: (context) =>
+                            const CheDoHoatDongScreen(),
+                        Web296App.thongTinVuonRauRoute: (context) =>
+                            const ThongTinVuonRauScreen(),
+                        Web296App.loginFarmRoute: (context) =>
+                            const LoginFarmScreen(),
+                        Web296App.registerFarmRoute: (context) =>
+                            const RegisterFarmScreen(),
                       },
                       theme: web296Theme.copyWith(
                         platform: GetPlatform.isMobile
@@ -275,11 +296,13 @@ class _Web296AppState extends State<Web296App>
 
 class _RestorableAppStateModel extends RestorableListenable<AppStateModel> {
   @override
-  AppStateModel createDefaultValue() => AppStateModel()..loadProducts();
+  // AppStateModel createDefaultValue() => AppStateModel()..loadProducts();
+  AppStateModel createDefaultValue() => AppStateModel();
 
   @override
   AppStateModel fromPrimitives(Object? data) {
-    final appState = AppStateModel()..loadProducts();
+    // final appState = AppStateModel()..loadProducts();
+    final appState = AppStateModel();
     final appData = Map<String, dynamic>.from(data as Map);
 
     // Reset selected category.

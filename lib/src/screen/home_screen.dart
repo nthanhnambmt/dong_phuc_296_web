@@ -41,17 +41,17 @@ class HomeScreen extends StatelessWidget {
             sortKey: const OrdinalSortKey(1, name: _ordinalSortKeyName),
             child: backdrop,
           ),
-          ExcludeSemantics(child: scrim),
-          Align(
-            alignment: isDesktop
-                ? AlignmentDirectional.topEnd
-                : AlignmentDirectional.bottomEnd,
-            child: Semantics(
-              container: true,
-              sortKey: const OrdinalSortKey(0, name: _ordinalSortKeyName),
-              child: expandingBottomSheet,
-            ),
-          ),
+          // ExcludeSemantics(child: scrim),
+          // Align(
+          //   alignment: isDesktop
+          //       ? AlignmentDirectional.topEnd
+          //       : AlignmentDirectional.bottomEnd,
+          //   child: Semantics(
+          //     container: true,
+          //     sortKey: const OrdinalSortKey(0, name: _ordinalSortKeyName),
+          //     child: expandingBottomSheet,
+          //   ),
+          // ),
         ],
       ),
     );

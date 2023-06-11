@@ -10,3 +10,7 @@ const String contactUsRoute = 'web296/contactUs';
 const String calendarRoute = 'web296/calendar';
 const String createProduct = '/web296/createProduct';
 const String orders = 'web296/orders';
+const String cheDoHoatDongRoute = 'web296/cheDoHoatDong';
+const String thongTinVuonRauRoute = 'web296/thongTinVuonRau';
+const String loginFarmRoute = 'web296/loginFarm';
+const String registerFarmRoute = 'web296/registerFarm';

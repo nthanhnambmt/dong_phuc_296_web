@@ -37,3 +37,4 @@ const Locale enLocales = Locale('en');
 ///Firebase Cloud filestore
 const String orderDocument = 'order';
 const String productDocument = 'product';
+const String accountDocument = 'account';
